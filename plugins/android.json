@@ -1,0 +1,27 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "com.lampa.startapp": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "com.shukriadams.micVolume": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        }
+    },
+    "dependent_plugins": {}
+}
