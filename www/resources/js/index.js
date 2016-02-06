@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         console.log('hit');
-        monitorSensors();
+        //monitorSensors();
 
     },
 };
@@ -42,5 +42,5 @@ var app = {
 app.initialize();
 
 function monitorSensors() {
-    accelMonSensor = setInterval(accelInterval, 30000);
+    accelMonSensor = setInterval(accelInterval, 30000); //starts monitoring the sensor every X milliseconds
 }

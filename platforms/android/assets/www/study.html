@@ -21,14 +21,16 @@
 <script src="resources/js/location.js"></script>
 <!-- <script src="resources/js/storing.js"></script> -->
 <script src="resources/js/mic.js"></script>
+<script src="resources/js/session.js"></script>
+
 <script src="resources/js/motion.js"></script>
 <script src="resources/js/study.js"></script>
-<script src="resources/js/index.js"></script>
+
 
 
 </head>
 
-<body onLoad="init()">
+<body>
 <div class="gridContainer clearfix">
 	<header>
   		<div id="hamburger">
@@ -58,17 +60,25 @@
       		<label class="onoffswitch-label" for="myonoffswitch"></label>
 		    </div>
       </div>
+      <br>
         <button onclick="getLoc()">Read Position</button>
+        <br>
         <br>
         <button onclick="micOn()">Mic On</button>
         <button onclick="micOff()">Mic Off</button>
         <button onclick="readMic()">Read Mic</button>
+        <button onclick="micInterval()">Monitor Mic</button>
         <br>
-        <button onclick="readAccel()">Read Accelerometer</button>
         <br>
+        <button onclick="readAccel()">Read Accel</button>
         <br>
         <button onclick="accelInterval()">Monitor accel</button>
         <button onclick="stopAccelInterval()">Stop monitoring accel</button>
+        <br>
+        <br>
+        <br>
+        <button onclick="monitorSensors()">Monitor All Sensors</button>
+        <button onclick="stopMonitorSensors()">Stop monitoring Sensors</button>
 
 
 

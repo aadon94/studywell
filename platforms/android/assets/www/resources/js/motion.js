@@ -1,9 +1,3 @@
-function accelValues (x, y, z, time) {
-	this.x = x;
-	this.y = y;
-	this.z = z;
-	this.time = time;
-}
 
 function onSuccessAcc(acceleration) {
     console.log('Acceleration X: ' + acceleration.x + '\n' +
@@ -12,6 +6,7 @@ function onSuccessAcc(acceleration) {
           'Timestamp: '      + acceleration.timestamp + '\n');
    // var currentAccelValues = new accelValues(acceleration.x, acceleration.y, acceleration.z, acceleration.timestamp);
     
+    //check if the device is moving
 	var moving = false;
 	if (acceleration.x > 0.3 || acceleration.x < -0.3) {
 		moving = true;
@@ -19,10 +14,17 @@ function onSuccessAcc(acceleration) {
 	if (acceleration.y > 0.2 || acceleration.y < -0.2) {
 		moving = true;
 	}
-	if (acceleration.z > 9.8 || acceleration.z < 9.3) {
+	if (acceleration.z > 9.8 || acceleration.z < 9.0) {
 		moving = true;
 	}
-
+	if (moving)
+	{
+		motionCount++;
+	}
+	if (motionCount > 3) {
+		accelNotStudying++;
+		stopAccelInterval();
+	}
     console.log(moving);
 }
 
@@ -32,29 +34,18 @@ function onErrorAcc() {
 
 function readAccel() {
 	navigator.accelerometer.getCurrentAcceleration(onSuccessAcc, onErrorAcc);
-
 }
 
+//do things on an interval////////////////////////////
 function accelInterval() {
+	accelIntervalCount++;
+	motionCount = 0;
 	accelSensor = setInterval(readAccel, 1000); //measure values every x seconds
 	setTimeout(stopAccelInterval, 10000); //stop reading after x seconds
 }
 
 function stopAccelInterval() {
 	clearInterval(accelSensor);
-}
-
-function isDeviceMoving() {
-	var moving = false;
-	if (currentAccelValues.x > 0.3 || currentAccelValues.x < -0.3) {
-		moving = true;
-	}
-	if (currentAccelValues.y > 0.2 || currentAccelValues.y < -0.2) {
-		moving = true;
-	}
-	if (currentAccelValues.z > 9.8 || currentAccelValues.z < 9.3) {
-		moving = true;
-	}
-
-	return moving;
+	clearTimeout(accelSensor);
+	clearTimeout(stopAccelInterval);
 }

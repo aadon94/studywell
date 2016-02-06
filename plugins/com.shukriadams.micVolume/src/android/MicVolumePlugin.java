@@ -49,8 +49,6 @@ public class MicVolumePlugin extends CordovaPlugin
     private int bufferSize= 1024;
     private float volum = 0;
     private int buflen;
-    boolean micOn = false;
-    boolean isPaused = null;
 
         int freq =8000;
         int chan = AudioFormat.CHANNEL_IN_MONO;
@@ -63,19 +61,14 @@ public class MicVolumePlugin extends CordovaPlugin
         audioRecord = new AudioRecord(src,freq,chan,enc,buflen);
  
         audioRecord.startRecording();
-        micOn = true;
-        isPaused = false;
         callbackContext.success();
     }
 
     private void stop(CallbackContext callbackContext) {
-      if (micOn) {
+
       audioRecord.stop();
       audioRecord.release();
       audioRecord = null;
-      isPaused = true;
-      micOn = false;
-    }
 
       callbackContext.success();
     } 
@@ -85,7 +78,6 @@ public class MicVolumePlugin extends CordovaPlugin
 
 
         returnObj.put("volum", max);
-        micOn = true;
        callbackContext.success(returnObj);
      }
     
