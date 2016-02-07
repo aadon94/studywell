@@ -46,9 +46,11 @@ function readMic(reading) {
 		micOn();
 	}
 
+	micCount++;
 	micVolume.read(function(reading){
     	console.log(reading.volume);
     	vol = reading.volume;
+    	totalVol = totalVol + vol;
 		}, errorCallback);
 
 	if (vol > 6) {
@@ -58,7 +60,8 @@ function readMic(reading) {
 		noisy = true;
 		stopMicInterval();
 		noisyBackground();
-	}	
+	}
+	averageVol = totalVol/micCount;	
 }
 
 
@@ -69,6 +72,8 @@ function micInterval() {
 	}
 	micIntervalCount++;
 	noisyCount = 0;
+	micCount = 0;
+	totalVol = 0;
 	micSensor = setInterval(readMic, 333); //measure values every x seconds
 	setTimeout(stopMicInterval, 10000); //stop reading after x seconds
 }
@@ -83,4 +88,9 @@ function stopMicInterval() {
 function noisyBackground() {
 	console.log('It is noisy!');
 	micNotStudying++;
+}
+
+//functions for testing
+function getAverageVolume() {
+	console.log('Average Volume: ' +averageVol);
 }
