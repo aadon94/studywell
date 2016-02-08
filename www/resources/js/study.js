@@ -35,18 +35,20 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        console.log('hit');
         statusOn = false;
-        //monitorSensors();
-        initialiseSampleRates();
+
+        document.getElementById('myonoffswitch').checked = false; //set switch to be off at start
+        initialiseMonitoring();
+
+        //control what switch does
         document.getElementById('myonoffswitch').onchange = function() {
-   	 		if ( document.getElementById('myonoffswitch').checked === false ) {
-        		stopMonitorSensors();
-    		}
-			if ( document.getElementById('myonoffswitch').checked === true ) {
-        		monitorSensors();
-    		}
-		}
+            if (document.getElementById('myonoffswitch').checked === false) {
+                stopMonitorSensors();
+            }
+            if (document.getElementById('myonoffswitch').checked === true) {
+                monitorSensors();
+            }
+        }
 
     },
 };
@@ -55,10 +57,10 @@ app.initialize();
 
 function monitorSensors() {
     if (statusOn === false) {
-    	micIntervalCount = 0;
+        micIntervalCount = 0;
         micNotStudying = 0;
-    	accelIntervalCount = 0;
-    	accelNotStudying = 0;
+        accelIntervalCount = 0;
+        accelNotStudying = 0;
         statusOn = true;
         accelInterval(); //for testing, remove for actual usage
         micInterval(); //for testing, remove for actual usage
@@ -68,14 +70,14 @@ function monitorSensors() {
 }
 
 function stopMonitorSensors() {
-	if (statusOn === true) {
-		createSessionScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
-		clearInterval(accelMonSensor);
-		clearInterval(micMonSensor);
-		clearTimeout(accelMonSensor);
-		clearTimeout(micMonSensor);
-		stopMicInterval();
-		stopAccelInterval();
+    if (statusOn === true) {
+        createSessionScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+        clearInterval(accelMonSensor);
+        clearInterval(micMonSensor);
+        clearTimeout(accelMonSensor);
+        clearTimeout(micMonSensor);
+        stopMicInterval();
+        stopAccelInterval();
         statusOn = false;
-	}
+    }
 }
