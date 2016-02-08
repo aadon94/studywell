@@ -4,6 +4,7 @@ var micStatusOn = false;
 var noisy = false;
 var noisyCount = 0;
 var vol;
+var ambientNoiseLevel = 6;
 
 function successCallback() {
   console.log('Microphone is now on.')
@@ -53,15 +54,26 @@ function readMic(reading) {
     	totalVol = totalVol + vol;
 		}, errorCallback);
 
-	if (vol > 6) {
-		noisyCount++;
-	}
-	if (noisyCount > 10) {
-		noisy = true;
-		stopMicInterval();
+	averageVol = totalVol/micCount;
+	if (averageVol > (ambientNoiseLevel + 10) && micCount > 10) {
 		noisyBackground();
+		noiseLevel = "vhigh";
 	}
-	averageVol = totalVol/micCount;	
+	else if (averageVol > (ambientNoiseLevel + 5) && micCount > 10) {
+		noisyBackground();
+		noiseLevel = "high";
+	}
+	else if (averageVol > ambientNoiseLevel && micCount > 10) {
+		noisyBackground();
+		noiseLevel = "medium";
+	}
+
+	else
+	{
+		noiseLevel = "low";
+	}
+
+
 }
 
 

@@ -35,6 +35,7 @@ var app = {
     onDeviceReady: function() {
         console.log('hit');
         //monitorSensors();
+        var statusOn = false;
         document.getElementById('myonoffswitch').onchange = function() {
    	 		if ( document.getElementById('myonoffswitch').checked === false ) {
         		stopMonitorSensors();
@@ -48,7 +49,6 @@ var app = {
 };
 
 app.initialize();
-var statusOn = false;
 
 function monitorSensors() {
 	micIntervalCount = 0;
@@ -72,5 +72,6 @@ function stopMonitorSensors() {
 		clearTimeout(micMonSensor);
 		stopMicInterval();
 		stopAccelInterval();
+        statusOn = false;
 	}
 }

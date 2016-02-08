@@ -35,6 +35,8 @@ var app = {
     onDeviceReady: function() {
         console.log('hit');
         //monitorSensors();
+        var statusOn = false;
+        initialiseSampleRates();
         document.getElementById('myonoffswitch').onchange = function() {
    	 		if ( document.getElementById('myonoffswitch').checked === false ) {
         		stopMonitorSensors();
@@ -48,7 +50,6 @@ var app = {
 };
 
 app.initialize();
-var statusOn = false;
 
 function monitorSensors() {
 	micIntervalCount = 0;
@@ -58,8 +59,8 @@ function monitorSensors() {
 	statusOn = true;
 	accelInterval(); //for testing, remove for actual usage
 	micInterval(); //for testing, remove for actual usage
-    accelMonSensor = setInterval(accelInterval, 30000); //starts monitoring the sensor every X milliseconds
-    micMonSensor = setInterval(micInterval, 30000); //starts monitoring the sensor every X milliseconds
+    accelMonSensor = setInterval(accelInterval, accelSampleRate); //starts monitoring the sensor every X milliseconds
+    micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
 
 }
 
@@ -72,5 +73,6 @@ function stopMonitorSensors() {
 		clearTimeout(micMonSensor);
 		stopMicInterval();
 		stopAccelInterval();
+        statusOn = false;
 	}
 }
