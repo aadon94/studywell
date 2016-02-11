@@ -57,25 +57,27 @@ app.initialize();
 
 function monitorSensors() {
     if (statusOn === false) {
-        micIntervalCount = 0;
-        micNotStudying = 0;
-        accelIntervalCount = 0;
-        accelNotStudying = 0;
+        micIntervalCount = 0; //no. of intervals within a session
+        micNotStudying = 0; //no. of intervals within a session that user was not studying
+        accelIntervalCount = 0; //no. of intervals within a session
+        accelNotStudying = 0; //no. of intervals within a session that user was not studying
         statusOn = true;
         accelInterval(); //for testing, remove for actual usage
         micInterval(); //for testing, remove for actual usage
         accelMonSensor = setInterval(accelInterval, accelSampleRate); //starts monitoring the sensor every X milliseconds
         micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
+        //updateSampling = setInterval(updateSamplingRate, 30000);
     }
 }
 
 function stopMonitorSensors() {
     if (statusOn === true) {
-        createSessionScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+        createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
         clearInterval(accelMonSensor);
         clearInterval(micMonSensor);
         clearTimeout(accelMonSensor);
         clearTimeout(micMonSensor);
+        //clearInterval(updateSampling);
         stopMicInterval();
         stopAccelInterval();
         statusOn = false;

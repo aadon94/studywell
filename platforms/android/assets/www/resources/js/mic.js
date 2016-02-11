@@ -82,6 +82,7 @@ function micInterval() {
 	if (micStatusOn == false) {
 		micOn();
 	}
+	console.log("Microphone sampling rate: " +micSampleRate);
 	micIntervalCount++;
 	noisyCount = 0;
 	micCount = 0;

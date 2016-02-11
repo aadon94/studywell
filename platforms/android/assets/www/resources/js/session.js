@@ -14,8 +14,6 @@ var session = function(id, user, studyScore, duration) {
 
 
 
-
-
 function getSessionDuration() {
 
 }
