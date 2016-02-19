@@ -17,6 +17,9 @@
  * under the License.
  */
 var statusOn;
+var timeBegin;
+var timeStop;
+var sessionDuration;
 
 var app = {
     // Application Constructor
@@ -38,7 +41,6 @@ var app = {
         statusOn = false;
 
         document.getElementById('myonoffswitch').checked = false; //set switch to be off at start
-        initialiseMonitoring();
 
         //control what switch does
         document.getElementById('myonoffswitch').onchange = function() {
@@ -57,6 +59,8 @@ app.initialize();
 
 function monitorSensors() {
     if (statusOn === false) {
+        timeBegin = new Date();
+        initialiseMonitoring();
         micIntervalCount = 0; //no. of intervals within a session
         micNotStudying = 0; //no. of intervals within a session that user was not studying
         accelIntervalCount = 0; //no. of intervals within a session
@@ -72,14 +76,30 @@ function monitorSensors() {
 
 function stopMonitorSensors() {
     if (statusOn === true) {
-        createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+        timeStop = new Date();
+        sessionDuration = timeStop - timeBegin;
         clearInterval(accelMonSensor);
         clearInterval(micMonSensor);
         clearTimeout(accelMonSensor);
         clearTimeout(micMonSensor);
+        pushData();
         //clearInterval(updateSampling);
         stopMicInterval();
         stopAccelInterval();
         statusOn = false;
     }
+}
+
+function restartAccelSensor(sampleRate) {
+    clearInterval(accelMonSensor);
+    clearTimeout(accelMonSensor);
+    accelMonSensor = setInterval(accelInterval, sampleRate);
+    console.log('Accelerometer restarted with a samplerate of: ' +sampleRate);
+}
+
+function restartMicSensor(sampleRate) {
+    clearInterval(micMonSensor);
+    clearTimeout(micMonSensor);
+    micMonSensor = setInterval(micInterval, sampleRate);
+    console.log('Microphone restarted with a samplerate of: ' +sampleRate);
 }

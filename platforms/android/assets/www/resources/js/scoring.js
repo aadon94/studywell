@@ -8,7 +8,15 @@ function createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, ac
     return sessionStudyScore;
 }
 
+function sensorScore(sensorNSCount, sensorIntervalCount) {
+	sensorScore = sensorNSCount / sensorIntervalCount * 100;
+	return sensorScore;
+}
 
+function objectSensorScore(sensor) {
+	sensorScore = (sensor.session.intervalNSCount / sensor.session.intervalNSCount) * 100;
+	return sensorScore;
+}
 
 
 

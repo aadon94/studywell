@@ -9,10 +9,12 @@ function onSuccessAcc(acceleration) {
     var moving = false;
     intervalMoving = false;
     accelPulseCount++;
-    if (acceleration.x > 0.3 || acceleration.x < -0.3) {
+    //console.log('old storage var: '+localStorage.getItem("oldAccelIntervalNSBool"));
+
+    if (acceleration.x > 0.4 || acceleration.x < -0.4) {
         moving = true;
     }
-    if (acceleration.y > 0.2 || acceleration.y < -0.2) {
+    if (acceleration.y > 0.3 || acceleration.y < -0.3) {
         moving = true;
     }
     if (acceleration.z > 9.8 || acceleration.z < 9.0) {
@@ -23,42 +25,50 @@ function onSuccessAcc(acceleration) {
     }
     if (motionCount > 3) {
         accelNotStudying++;
-        accelIntervalNotStudyingBool = "true";
+        accelIntervalNSBool = "true";
+        //console.log("accelIntervalNSBool: " +accelIntervalNSBool);
+
 
         stopAccelInterval();
 
-    } else if (accelPulseCount > 8) {
-        accelIntervalNotStudyingBool = "false";
+    } else if (accelPulseCount > 9) {
+        accelIntervalNSBool = "false";
+        //console.log("accelIntervalNSBool: " +accelIntervalNSBool    );
+
     }
 
-    if (localStorage.getItem("oldAccelIntervalNotStudyingBool") != null) {
-    	updateSampleR(accelIntervalNotStudyingBool, accelSampleRate, localStorage.getItem("oldAccelIntervalNotStudyingBool"));
+    if (localStorage.getItem("oldAccelIntervalNSBool") != null) {
+        //console.log('running updateSampleR');
+        updateSampleRate(accelIntervalNSBool, accelSampleRate, localStorage.getItem("oldAccelIntervalNSBool"), "accelerometer");
     }
 
     if (typeof(Storage) !== "undefined") {
-        localStorage.setItem("oldAccelIntervalNotStudyingBool", accelIntervalNotStudyingBool);
+        localStorage.setItem("oldAccelIntervalNSBool", accelIntervalNSBool);
 
     } else {
         // Sorry! No Web Storage support..
         console.log("No web storage support - oh dear.");
     }
-    console.log(moving);
+    console.log('Device moving: ' + moving);
 }
+
 
 function onErrorAcc() {
     alert('Error: ' + error);
 }
 
+
 function readAccel() {
     navigator.accelerometer.getCurrentAcceleration(onSuccessAcc, onErrorAcc);
 }
+
 
 //do things on an interval////////////////////////////
 function accelInterval() {
     //localStorage.setItem("oldAccelIntervalNotStudyingBool", "initial");
     accelPulseCount = 0;
     console.log("Accelerometer sampling rate: " + accelSampleRate);
-    accelIntervalNotStudyingBool = false;
+    accelIntervalNSBool =  false; //used to be real false boolean 
 
     accelIntervalCount++;
     motionCount = 0;
@@ -69,5 +79,4 @@ function accelInterval() {
 function stopAccelInterval() {
     clearInterval(accelSensor);
     clearTimeout(accelSensor);
-    clearTimeout(stopAccelInterval); //probably useless
 }
