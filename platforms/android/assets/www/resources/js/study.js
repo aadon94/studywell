@@ -16,6 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var statusOn;
+var timeBegin;
+var timeStop;
+var sessionDuration;
+var userNotes;
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -33,44 +39,81 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        console.log('hit');
-        //monitorSensors();
+        statusOn = false;
+
+        document.getElementById('myonoffswitch').checked = false; //set switch to be off at start
+
+        //control what switch does
         document.getElementById('myonoffswitch').onchange = function() {
-   	 		if ( document.getElementById('myonoffswitch').checked === false ) {
-        		stopMonitorSensors();
-    		}
-			if ( document.getElementById('myonoffswitch').checked === true ) {
-        		monitorSensors();
-    		}
-		}
+            if (document.getElementById('myonoffswitch').checked === false) {
+                stopMonitorSensors();
+            }
+            if (document.getElementById('myonoffswitch').checked === true) {
+                monitorSensors();
+            }
+        }
 
     },
 };
 
 app.initialize();
-var statusOn = false;
 
 function monitorSensors() {
-	micIntervalCount = 0;
-	micNotStudying = 0;
-	accelIntervalCount = 0;
-	accelNotStudying = 0;
-	statusOn = true;
-	accelInterval(); //for testing, remove for actual usage
-	micInterval(); //for testing, remove for actual usage
-    accelMonSensor = setInterval(accelInterval, 30000); //starts monitoring the sensor every X milliseconds
-    micMonSensor = setInterval(micInterval, 30000); //starts monitoring the sensor every X milliseconds
-
+    if (statusOn === false) {
+        timeBegin = new Date();
+        initialiseMonitoring();
+        micIntervalCount = 0; //no. of intervals within a session
+        micNotStudying = 0; //no. of intervals within a session that user was not studying
+        accelIntervalCount = 0; //no. of intervals within a session
+        accelNotStudying = 0; //no. of intervals within a session that user was not studying
+        statusOn = true;
+        accelInterval(); //for testing, remove for actual usage
+        micInterval(); //for testing, remove for actual usage
+        accelMonSensor = setInterval(accelInterval, accelSampleRate); //starts monitoring the sensor every X milliseconds
+        micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
+        //updateSampling = setInterval(updateSamplingRate, 30000);
+    }
 }
 
 function stopMonitorSensors() {
-	if (statusOn = true) {
-		createSessionScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
-		clearInterval(accelMonSensor);
-		clearInterval(micMonSensor);
-		clearTimeout(accelMonSensor);
-		clearTimeout(micMonSensor);
-		stopMicInterval();
-		stopAccelInterval();
-	}
+    if (statusOn === true) {
+        timeStop = new Date();
+        sessionDuration = timeStop - timeBegin;
+        clearInterval(accelMonSensor);
+        clearInterval(micMonSensor);
+        clearTimeout(accelMonSensor);
+        clearTimeout(micMonSensor);
+        askUserNotes();
+        pushData();
+        //clearInterval(updateSampling);
+        stopMicInterval();
+        stopAccelInterval();
+        statusOn = false;
+    }
+}
+
+function restartAccelSensor(sampleRate) {
+    clearInterval(accelMonSensor);
+    clearTimeout(accelMonSensor);
+    accelMonSensor = setInterval(accelInterval, sampleRate);
+    console.log('Accelerometer restarted with a samplerate of: ' +sampleRate);
+}
+
+function restartMicSensor(sampleRate) {
+    clearInterval(micMonSensor);
+    clearTimeout(micMonSensor);
+    micMonSensor = setInterval(micInterval, sampleRate);
+    console.log('Microphone restarted with a samplerate of: ' +sampleRate);
+}
+
+function askUserNotes() {
+    userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
+}
+
+function getUserNotes() {
+    if (userNotes != null) {
+        return userNotes;
+    }
+    else
+        return " ";
 }
