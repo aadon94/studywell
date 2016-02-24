@@ -20,6 +20,7 @@ var statusOn;
 var timeBegin;
 var timeStop;
 var sessionDuration;
+var userNotes;
 
 var app = {
     // Application Constructor
@@ -82,6 +83,7 @@ function stopMonitorSensors() {
         clearInterval(micMonSensor);
         clearTimeout(accelMonSensor);
         clearTimeout(micMonSensor);
+        askUserNotes();
         pushData();
         //clearInterval(updateSampling);
         stopMicInterval();
@@ -102,4 +104,16 @@ function restartMicSensor(sampleRate) {
     clearTimeout(micMonSensor);
     micMonSensor = setInterval(micInterval, sampleRate);
     console.log('Microphone restarted with a samplerate of: ' +sampleRate);
+}
+
+function askUserNotes() {
+    userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
+}
+
+function getUserNotes() {
+    if (userNotes != null) {
+        return userNotes;
+    }
+    else
+        return " ";
 }

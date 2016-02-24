@@ -1,0 +1,45 @@
+.tablerep
+{
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-bottom: 1px solid #2196f3;
+    text-align: center;
+    width: 100%;
+    vertical-align: top;
+
+}
+.tablerep td
+{
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    overflow: hidden;
+
+    padding: 10px 5px;
+
+    word-break: normal;
+
+    border-width: 1px;
+    border-style: solid;
+}
+
+.tablerep .tr-95kx
+{
+    
+    background-color: #2196f3;
+    font-weight: bold;
+
+}
+
+.tablerep .tr-95kxB
+{
+    
+    background-color: #2196f3;
+}
+
+.tablerep .tr-yw4lB
+{
+    vertical-align: top;
+    font-weight: bold;
+
+}

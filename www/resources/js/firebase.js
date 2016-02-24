@@ -1,18 +1,41 @@
 var swFireBase = new Firebase("https://vivid-heat-9475.firebaseIO.com/");
 
-var	sessions = swFireBase.child('sessions');
-var session =	sessions.child('session');
+// var	sessions = swFireBase.child('sessions');
+// var session =	sessions.child('session');
+
+// function pushData() {
+// 	sessions.push({
+// 	  userID: getUserID(),
+// 	  serverTimeStamp: Firebase.ServerValue.TIMESTAMP,
+// 	  userAgent: navigator.userAgent,
+// 	  sessionID: generateSessionID(),
+// 	  time: datetime,
+// 	  duration: timeConvert(sessionDuration),
+// 	  score: createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount),
+// 	  usernotes: "this is a user note"
+//   }
+// );
+// }
+
+var	users = swFireBase.child('users');
+var userName = users.child(getUserID());
 
 function pushData() {
-	sessions.push({
+	userName.push({
 	  userID: getUserID(),
 	  serverTimeStamp: Firebase.ServerValue.TIMESTAMP,
 	  userAgent: navigator.userAgent,
 	  sessionID: generateSessionID(),
-	  time: datetime,
+	  time: getTime(),
+	  date: getDate(),
 	  duration: timeConvert(sessionDuration),
 	  score: createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount),
-	  usernotes: "this is a user note"
+	  micIntervalCount: micIntervalCount,
+	  micNotStudyingCount: micNotStudying,
+	  accelIntervalCount: accelIntervalCount,
+	  accelNotStudingCount: accelNotStudying,
+	  appMessage: appMessage,
+	  userNotes: getUserNotes()
   }
 );
 }
