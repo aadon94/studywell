@@ -46,10 +46,10 @@ var app = {
         //control what switch does
         document.getElementById('myonoffswitch').onchange = function() {
             if (document.getElementById('myonoffswitch').checked === false) {
-                stopMonitorSensors();
+                stopMonitoringSensors();
             }
             if (document.getElementById('myonoffswitch').checked === true) {
-                monitorSensors();
+                startMonitoringSensors();
             }
         }
 
@@ -58,14 +58,16 @@ var app = {
 
 app.initialize();
 
-function monitorSensors() {
+function startMonitoringSensors() {
     if (statusOn === false) {
+        monitoringEnabled();
         timeBegin = new Date();
         initialiseMonitoring();
         micIntervalCount = 0; //no. of intervals within a session
         micNotStudying = 0; //no. of intervals within a session that user was not studying
         accelIntervalCount = 0; //no. of intervals within a session
         accelNotStudying = 0; //no. of intervals within a session that user was not studying
+        totalDurationPaused = 0;
         statusOn = true;
         accelInterval(); //for testing, remove for actual usage
         micInterval(); //for testing, remove for actual usage
@@ -75,20 +77,9 @@ function monitorSensors() {
     }
 }
 
-function stopMonitorSensors() {
+function stopMonitoringSensors() {
     if (statusOn === true) {
-        timeStop = new Date();
-        sessionDuration = timeStop - timeBegin;
-        clearInterval(accelMonSensor);
-        clearInterval(micMonSensor);
-        clearTimeout(accelMonSensor);
-        clearTimeout(micMonSensor);
-        askUserNotes();
-        pushData();
-        //clearInterval(updateSampling);
-        stopMicInterval();
-        stopAccelInterval();
-        statusOn = false;
+        stopMonitoringPrompt();
     }
 }
 
@@ -96,24 +87,46 @@ function restartAccelSensor(sampleRate) {
     clearInterval(accelMonSensor);
     clearTimeout(accelMonSensor);
     accelMonSensor = setInterval(accelInterval, sampleRate);
-    console.log('Accelerometer restarted with a samplerate of: ' +sampleRate);
+    console.log('Accelerometer restarted with a samplerate of: ' + sampleRate);
 }
 
 function restartMicSensor(sampleRate) {
     clearInterval(micMonSensor);
     clearTimeout(micMonSensor);
     micMonSensor = setInterval(micInterval, sampleRate);
-    console.log('Microphone restarted with a samplerate of: ' +sampleRate);
+    console.log('Microphone restarted with a samplerate of: ' + sampleRate);
+}
+
+function pauseMonitoring() {
+    timePaused = new Date();
+
+    clearInterval(accelMonSensor);
+    clearInterval(micMonSensor);
+    clearTimeout(accelMonSensor);
+    clearTimeout(micMonSensor);
+
+}
+
+function resumeMonitoring() {
+    timeResumed = new Date();
+
+    accelMonSensor = setInterval(accelInterval, accelSampleRate); //starts monitoring the sensor every X milliseconds
+    micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
+    durationPaused = timeResumed - timePaused;
+    totalDurationPaused += durationPaused;
+
+    document.getElementById('myonoffswitch').checked = true;
+
 }
 
 function askUserNotes() {
     userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
+    localStorage.setItem("userNotes", userNotes);
 }
 
 function getUserNotes() {
-    if (userNotes != null) {
-        return userNotes;
-    }
-    else
+    if (localStorage.getItem("userNotes") != null) {
+        return localStorage.getItem("userNotes");
+    } else
         return " ";
 }

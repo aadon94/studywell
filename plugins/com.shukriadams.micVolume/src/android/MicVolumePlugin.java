@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
 import android.app.Activity;
+import android.content.Intent;
 
 // used by audio
 import android.os.Bundle;
@@ -47,45 +48,45 @@ public class MicVolumePlugin extends CordovaPlugin
     private short[] buffer = null;
     private AudioRecord audioRecord = null;
     private int bufferSize= 1024;
-    private float volum = 0;
+    private float volume = 0;
     private int buflen;
-
-        int freq =8000;
+ 
+    private void start(CallbackContext callbackContext) {
+    int freq =44100;
         int chan = AudioFormat.CHANNEL_IN_MONO;
         int enc  = AudioFormat.ENCODING_PCM_16BIT;
         int src  = MediaRecorder.AudioSource.MIC;
- 
-    private void start(CallbackContext callbackContext) {
-
         buflen = AudioRecord.getMinBufferSize(freq, chan, enc);
         audioRecord = new AudioRecord(src,freq,chan,enc,buflen);
  
         audioRecord.startRecording();
+        buffer = new short[bufferSize];
+
         callbackContext.success();
+    }
+ 
+    private void read(CallbackContext callbackContext) throws JSONException
+    {
+
+      JSONObject returnObj = new JSONObject();
+    
+        double amplitude = 0;
+        int bufferReadResult = audioRecord.read(buffer, 0, buffer.length);
+        double sumLevel = 0;
+        for (int i = 0; i < bufferReadResult; i++) {
+          sumLevel += buffer[i];
+        }
+        amplitude = Math.abs((sumLevel / bufferReadResult));
+
+        returnObj.put("volume", Math.sqrt(amplitude));
+       callbackContext.success(returnObj);
     }
 
     private void stop(CallbackContext callbackContext) {
-
       audioRecord.stop();
       audioRecord.release();
       audioRecord = null;
 
       callbackContext.success();
     } 
- 
-    private void read(CallbackContext callbackContext) throws JSONException {
-
-
-
-        returnObj.put("volum", max);
-       callbackContext.success(returnObj);
-     }
-    
-
-
 }
-
-
-
- 
-
