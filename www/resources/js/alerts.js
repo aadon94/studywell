@@ -9,8 +9,6 @@ function monitoringEnabled() {
         'Studying Started', // title
         'OK' // buttonName
     );
-    navigator.notification.beep(1);
-
 }
 
 
@@ -31,15 +29,16 @@ function onPrompt(results) {
 }
 
 function onConfirmReturn(buttonIndex) {
-    if (buttonIndex == 1) {
-        //stop monitoring
-        stopMonitorSensors();
-    }
     if (buttonIndex == 2) {
-        //continue monitoring (do nothing)
+        //stop monitoring
+        stopMonitoringSensors();
     }
     if (buttonIndex == 3) {
+        //continue monitoring (do nothing)
+    }
+    if (buttonIndex == 1) {
         //pause monitoring
+        pausedPrompt();
     }
 }
 
@@ -52,7 +51,7 @@ function returnToStudyAlert(bool) {
             'Seems like you may have become a little distracted. Have you finished your study session?', // message
             onConfirmReturn, // callback
             'Sorry to interrupt, but...', // title
-            ['Yes', 'No', 'Take a Break'] // button labels
+            ['Take a Break', 'Yes', 'No'] // button labels
         );
     }
 
@@ -64,6 +63,7 @@ function onConfirmBreak(buttonIndex) {
     }
     if (buttonIndex == 2) {
         //pause monitoring
+        pausedPrompt();
     }
 }
 
@@ -83,28 +83,16 @@ function takeABreakAlert(bool) {
 }
 
 function onConfirmStopMon(buttonIndex) {
-    if (buttonIndex == 1) {
-        //stop monitoring
-        timeStop = new Date();
-        sessionDuration = (timeStop - timeBegin) - totalDurationPaused;
-        clearInterval(accelMonSensor);
-        clearInterval(micMonSensor);
-        clearTimeout(accelMonSensor);
-        clearTimeout(micMonSensor);
-        askUserNotes();
-        //clearInterval(updateSampling);
-        stopMicInterval();
-        stopAccelInterval();
-        statusOn = false;
-        pushData();
-    }
     if (buttonIndex == 2) {
+        //stop monitoring
+        stopMonitoringSensors();
+    }
+    if (buttonIndex == 3) {
         //continue monitoring
         document.getElementById('myonoffswitch').checked = true;
     }
-    if (buttonIndex == 3) {
+    if (buttonIndex == 1) {
         //pause monitoring
-        pauseMonitoring();
         pausedPrompt();
     }
 }
@@ -114,16 +102,58 @@ function stopMonitoringPrompt() {
         'Do you want to end this study session?', // message
         onConfirmStopMon, // callback
         'Confirmation', // title
-        ['Yes', 'No', 'Take a Short Break'] // button labels
+        ['Take a Short Break', 'Yes', 'No'] // button labels
     );
 }
 
 
 function pausedPrompt() {
+    pauseMonitoring();
     navigator.notification.alert(
         'Monitoring has been paused, click OK when you wish to resume!', // message
         resumeMonitoring, // callback
         'Monitoring Paused', // title
         'OK' // buttonName
     );
+}
+
+function checkStudyReminder() {
+    var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+    if (localStorage.getItem("score") != null) {
+        if (localStorage.getItem("score") > score) {
+            if ((localStorage.getItem("score") - score) > 20) {
+                var bool = true;
+                returnToStudyAlert(bool);
+            }
+        }
+    }
+    localStorage.setItem("score", score);
+
+}
+
+
+function checkReminder() {
+    var currentT = new Date();
+    var timeSinceBreak = currentT - timeResumed;
+
+    //check if user should consider having a break from studying
+    if (timeSinceBreak > 3000000) { //if time since break is greater than 50 mins (3000000), 60000 1 min
+        var currentScore = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+        if (currentScore > 60) {
+            //prompt break
+            var breakNotifBool = true; //boolean for notifications on or off
+            takeABreakAlert(breakNotifBool);
+            timeResumed = new Date();
+        }
+    }
+
+    //check if user isn't studying well
+    var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+    localStorage.setItem("currentScore", score);
+
+    var lastTime = new Date();
+
+
+
+
 }

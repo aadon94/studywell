@@ -27,7 +27,7 @@ function setUserID() {
 function getUserID() {
 
     if (localStorage.getItem("userID") == null) {
-        return "User ID is not set.";
+        return "User ID is not set";
     } else
         return localStorage.getItem("userID");
 }

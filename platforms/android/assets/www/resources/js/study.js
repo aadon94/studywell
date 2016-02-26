@@ -46,7 +46,7 @@ var app = {
         //control what switch does
         document.getElementById('myonoffswitch').onchange = function() {
             if (document.getElementById('myonoffswitch').checked === false) {
-                stopMonitoringSensors();
+                tryStopMonitoringSensors();
             }
             if (document.getElementById('myonoffswitch').checked === true) {
                 startMonitoringSensors();
@@ -60,8 +60,11 @@ app.initialize();
 
 function startMonitoringSensors() {
     if (statusOn === false) {
+        studyCheck = setInterval(checkStudyReminder, 60000); //timer to check if the users score has dropped significantly recently
+        firstRun = true; //var to check if the phone has to indentify the speed at which accel can be checked
         monitoringEnabled();
         timeBegin = new Date();
+        timeResumed = new Date;
         initialiseMonitoring();
         micIntervalCount = 0; //no. of intervals within a session
         micNotStudying = 0; //no. of intervals within a session that user was not studying
@@ -77,10 +80,24 @@ function startMonitoringSensors() {
     }
 }
 
-function stopMonitoringSensors() {
+function tryStopMonitoringSensors() {
     if (statusOn === true) {
         stopMonitoringPrompt();
     }
+}
+function stopMonitoringSensors() {
+        timeStop = new Date();
+        sessionDuration = (timeStop - timeBegin) - totalDurationPaused;
+        clearInterval(accelMonSensor);
+        clearInterval(micMonSensor);
+        clearTimeout(accelMonSensor);
+        clearTimeout(micMonSensor);
+        askUserNotes();
+        //clearInterval(updateSampling);
+        stopMicInterval();
+        stopAccelInterval();
+        statusOn = false;
+        pushData();
 }
 
 function restartAccelSensor(sampleRate) {
@@ -99,6 +116,7 @@ function restartMicSensor(sampleRate) {
 
 function pauseMonitoring() {
     timePaused = new Date();
+    document.getElementById('myonoffswitch').checked = false;
 
     clearInterval(accelMonSensor);
     clearInterval(micMonSensor);
@@ -114,6 +132,9 @@ function resumeMonitoring() {
     micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
     durationPaused = timeResumed - timePaused;
     totalDurationPaused += durationPaused;
+
+    document.getElementById('myonoffswitch').checked = true;
+
 }
 
 function askUserNotes() {
