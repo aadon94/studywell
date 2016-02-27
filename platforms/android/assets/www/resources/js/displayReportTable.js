@@ -32,7 +32,7 @@ app.initialize();
 function drawData(date, time, duration, score, appMessage, userNotes) {
   //var myTable = "Time: "+time + "<br> Duration: " +duration + "<br> Score: " +score +"<br> <br>";
   var sessionTable = "<table class ='tablerep'> <tr> <td class='tr-95kxB'>Date: </td> <td class='tr-95kx'>" +date + "</td> </tr>"
-  sessionTable += "<tr> <td class='tr-yw4lB'>Time: </td> <td class='tr-yw4l'>" +time + "</td> </tr>"
+  sessionTable += "<tr> <td class='tr-yw4lB'>Start Time: </td> <td class='tr-yw4l'>" +time + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-95kxB'>Duration: </td> <td class='tr-95kx'>" +duration + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-yw4lB'>Score: </td> <td class='tr-yw4l'>" +score + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-95kxB'>App Notes: </td> <td class='tr-95kx'>" +appMessage + "</td> </tr>"
