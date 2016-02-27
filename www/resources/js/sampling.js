@@ -20,6 +20,7 @@ function decreaseSampleRate(currentRate) {
 }
 
 function initialiseMonitoring() {
+    totalDurationPaused = 0;
     accelSampleRate = 30000;
     micSampleRate = 30000;
     micSteadyScoreCount = 0;
@@ -159,54 +160,54 @@ function updateSampleRate(notStudyingBool, sensorSampleRate, storageVar, sensorN
     }
 }
 
-function updateMicSampleRate(notStudyingBool, sensorSampleRate, storageVar, sensorName) {
+// // function updateMicSampleRate(notStudyingBool, sensorSampleRate, storageVar, sensorName) {
 
-    if ((storageVar == "true" && notStudyingBool == "true") || (storageVar == "false" && notStudyingBool == "false")) {
-        sensorSteadyCount++;
-        sensorFluctuatingCount = 0;
-        console.log(sensorName + " Steady Count Up, storageVar: " + storageVar + " ,notStudyingBool: " + notStudyingBool);
-    }
-    if ((storageVar == "true" && notStudyingBool == "false") || (storageVar == "false" && notStudyingBool == "true")) {
-        sensorFluctuatingCount++;
-        sensorSteadyCount = 0;
-        console.log(sensorName + " Fluct Count Up, storageVar: " + storageVar + " ,notStudyingBool: " + notStudyingBool);
+//     if ((storageVar == "true" && notStudyingBool == "true") || (storageVar == "false" && notStudyingBool == "false")) {
+//         sensorSteadyCount++;
+//         sensorFluctuatingCount = 0;
+//         console.log(sensorName + " Steady Count Up, storageVar: " + storageVar + " ,notStudyingBool: " + notStudyingBool);
+//     }
+//     if ((storageVar == "true" && notStudyingBool == "false") || (storageVar == "false" && notStudyingBool == "true")) {
+//         sensorFluctuatingCount++;
+//         sensorSteadyCount = 0;
+//         console.log(sensorName + " Fluct Count Up, storageVar: " + storageVar + " ,notStudyingBool: " + notStudyingBool);
 
-    }
+//     }
 
-    if (sensorName == "accelerometer") {
-        if (sensorSteadyCount > 2) { //make around 5 for actual use
-            sensorSteadyCount = 0;
-            accelSampleRate = decreaseSampleRate(sensorSampleRate);
-            console.log("SampleRate Decreased");
-            //restart that sensor
-            restartAccelSensor(accelSampleRate);
-        }
-        if (sensorFluctuatingCount > 2) {
-            sensorFluctuatingCount = 0;
-            accelSampleRate = increaseSampleRate(sensorSampleRate);
-            console.log("SampleRate Increased");
-            //restart that sensor
-            restartAccelSensor(accelSampleRate);
+//     if (sensorName == "accelerometer") {
+//         if (sensorSteadyCount > 2) { //make around 5 for actual use
+//             sensorSteadyCount = 0;
+//             accelSampleRate = decreaseSampleRate(sensorSampleRate);
+//             console.log("SampleRate Decreased");
+//             //restart that sensor
+//             restartAccelSensor(accelSampleRate);
+//         }
+//         if (sensorFluctuatingCount > 2) {
+//             sensorFluctuatingCount = 0;
+//             accelSampleRate = increaseSampleRate(sensorSampleRate);
+//             console.log("SampleRate Increased");
+//             //restart that sensor
+//             restartAccelSensor(accelSampleRate);
 
-        }
-    }
+//         }
+//     }
 
-    if (sensorName == "microphone") {
-        if (sensorSteadyCount > 15) {
-            sensorSteadyCount = 0;
-            micSampleRate = decreaseSampleRate(sensorSampleRate);
-            console.log("SampleRate Decreased for mic");
-            //restart that sensor
-            restartMicSensor(micSampleRate);
+//     if (sensorName == "microphone") {
+//         if (sensorSteadyCount > 15) {
+//             sensorSteadyCount = 0;
+//             micSampleRate = decreaseSampleRate(sensorSampleRate);
+//             console.log("SampleRate Decreased for mic");
+//             //restart that sensor
+//             restartMicSensor(micSampleRate);
 
-        }
-        if (sensorFluctuatingCount > 10) {
-            sensorFluctuatingCount = 0;
-            micSampleRate = increaseSampleRate(sensorSampleRate);
-            console.log("SampleRate Increased for mic");
-            //restart that sensor
-            restartMicSensor(micSampleRate);
+//         }
+//         if (sensorFluctuatingCount > 10) {
+//             sensorFluctuatingCount = 0;
+//             micSampleRate = increaseSampleRate(sensorSampleRate);
+//             console.log("SampleRate Increased for mic");
+//             //restart that sensor
+//             restartMicSensor(micSampleRate);
 
-        }
-    }
-}
+//         }
+//     }
+// }

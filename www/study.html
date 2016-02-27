@@ -13,6 +13,8 @@
 <link href="vendors/jquery/slidemenu.hamburger.css" rel="stylesheet" type="text/css">
 <link href="resources/css/index.css" rel="stylesheet" type="text/css">
 <link href="resources/css/switch.css" rel="stylesheet" type="text/css">
+<link href="resources/css/study.css" rel="stylesheet" type="text/css">
+
 
 <script src="cordova.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -22,6 +24,7 @@
 <script src="vendors/phonegap/location/Position.js"></script>
 <script src="vendors/phonegap/location/PositionError.js"></script> -->
 <script src="resources/js/location.js"></script>
+<script src="resources/js/timer.js"></script>
 <!-- <script src="resources/js/storing.js"></script> -->
 <script src="resources/js/mic.js"></script>
 <script src="resources/js/session.js"></script>
@@ -30,6 +33,9 @@
 <script src="resources/js/scoring.js"></script>
 <script src="resources/js/study.js"></script>
 <script src="resources/js/settings.js"></script>
+<script src="resources/js/alerts.js"></script>
+
+
 
 
 
@@ -59,13 +65,21 @@
 	</nav>
 
 
-	<div id="content">
+	<div id="content" align="center">
     	<div id="studySwitch">
     	   <div class="onoffswitch">
       		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
       		<label class="onoffswitch-label" for="myonoffswitch"></label>
 		    </div>
       </div>
+
+      
+      <div id="studyPage">Hit the switch above to start a study session!</div>
+      <br>
+      <br>
+
+      <h1><time>00:00:00</time></h1>
+
 
 
 
@@ -78,6 +92,8 @@
 <script src="resources/js/firebase.js"></script>
 <script src="resources/js/location.js"></script>
 <script src="vendors/jquery/jquery.hamburger.js"></script>
+<script src="resources/js/timer.js"></script>
+
 </html>
 
 
