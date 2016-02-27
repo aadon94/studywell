@@ -2,61 +2,91 @@
 <html class="">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Settings</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings</title>
 
-<!--script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>-->
+  <!--script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>-->
 
-<link href="resources/css/boilerplate.css" rel="stylesheet" type="text/css">
-<!--<link href="resources/css/index.css" rel="stylesheet" type="text/css">-->
-<link href="vendors/jquery/slidemenu.hamburger.css" rel="stylesheet" type="text/css">
-<link href="resources/css/index.css" rel="stylesheet" type="text/css">
-<script src="cordova.js"></script>
-<script src="resources/js/settings.js"></script>
+  <link href="resources/css/boilerplate.css" rel="stylesheet" type="text/css">
+  <!--<link href="resources/css/index.css" rel="stylesheet" type="text/css">-->
+  <link href="vendors/jquery/slidemenu.hamburger.css" rel="stylesheet" type="text/css">
+  <link href="resources/css/index.css" rel="stylesheet" type="text/css">
+  <script src="cordova.js"></script>
+  <script src="resources/js/settings.js"></script>
+  <script src="resources/js/settingsPage.js"></script>
+
 
 
 </head>
 
 <body>
-<div class="gridContainer clearfix">
-	<header>
-  		<div id="hamburger">
-    		<div></div>
-    		<div></div>
-    		<div></div>
-  		</div>
-  		<div class="title amburger-action">StudyWell</div>
-	</header>
-    
-    <nav class="clear">
-    	<ul>
-    		<li><a href="index.html">Home</a></li>
-        <li><a href="study.html">Study Time</a></li>
-    		<li><a href="schedule.html">Schedule</a></li>	
-    		<li><a href="reports.html">Reports</a></li>
-   			<li><a href="settings.html">Settings</a></li>
-    		<li><a href="help.html">Help</a></li>
-  		</ul>
-	</nav>
+  <div class="gridContainer clearfix">
+   <header>
+    <div id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="title amburger-action">StudyWell</div>
+  </header>
+
+  <nav class="clear">
+   <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="study.html">Study Time</a></li>
+    <li><a href="schedule.html">Schedule</a></li>	
+    <li><a href="reports.html">Reports</a></li>
+    <li><a href="settings.html">Settings</a></li>
+    <li><a href="help.html">Help</a></li>
+  </ul>
+</nav>
 
 
-	<div id="content">
-          <form>
-            User ID:<br>
-            <input type="text" id="userIDinput" name="userIDinputName"><br>
-            <input type="button" value="Submit" onclick="setUserID()">
-            <br>
-            <br>
-            Create Account<br>
-            Email:<br>
-            <input type="text" id="email" ><br>
-            Password:<br>
-            <input type="text" id="password" ><br>
-            <input type="button" value="Create Account" onclick="createAccount()">
-          </form>
-        
-        </div>
+<div id="content" align="center">
+  <div class="userID">
+    <form>
+      Current User ID: <div id="userIDname"></div>
+      New User ID:<br>
+      <input type="text" id="userIDinput" name="userIDinputName"><br>
+      <input type="button" value="Submit" onclick="setUserID()">
+      <br>
+      <br>
+    </form>
+  </div>
+  <div class ="reminders">
+    Break Reminder:
+    <br>
+    This allows me to remind you to take a break every so often if you've been studying well.
+    <form action="">
+      <input type="radio" name="breakRemind" onclick="handleBreakReminder(this);" value="true" checked="checked"> On<br>
+      <input type="radio" name="breakRemind" onclick="handleBreakReminder(this);" value="false"> Off<br>
+    </form>
+    <br>
+    <div>
+      <select onchange="handleStudyPeriod(this)">
+        <option value="20">20 Minutes</option>
+        <option value="30">30 Minutes</option>
+        <option value="40">40 Minutes</option>
+        <option selected="selected" value="50">50 Minutes</option>
+        <option value="60">60 Minutes</option>
+      </select>
+    </div>
+    Here you can select how often you want to study between breaks. Rememeber though, I'll only suggest you have a break if I think you're doing well!
+    <br>
+    <br>
+    Back to Studying Reminder:
+    <br>
+    This allows me to let you know if it seems you've become distracted.
+    <form action="">
+      <input type="radio" name="distractedRemind" onclick="handleDistractedReminder(this);" value="true" checked="checked"> On<br>
+      <input type="radio" name="distractedRemind" onclick="handleDistractedReminder(this);" value="false"> Off<br>
+    </form>
+
+  </div>
+
+
+</div>
 </div>
 
 </body>

@@ -74,7 +74,7 @@ function onSuccessAcc(acceleration) {
 
     //do things on an interval////////////////////////////
     function accelInterval() {
-        checkReminder();
+        checkBreakReminder(getBreakNotifBool());
         //localStorage.setItem("oldAccelIntervalNotStudyingBool", "initial");
         accelPulseCount = 0;
         console.log("Accelerometer sampling rate: " + accelSampleRate);

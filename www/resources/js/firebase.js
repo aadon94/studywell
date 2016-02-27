@@ -28,7 +28,8 @@ function pushData() {
 	  sessionID: generateSessionID(),
 	  time: getTime(),
 	  date: getDate(),
-	  duration: timeConvert(sessionDuration),
+	  duration: getDurationTimer(), //new duration taken from timer
+	  //duration: timeConvert(sessionDuration),
 	  score: createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount),
 	  micIntervalCount: micIntervalCount,
 	  micNotStudyingCount: micNotStudying,

@@ -42,18 +42,16 @@ function onConfirmReturn(buttonIndex) {
     }
 }
 
-function returnToStudyAlert(bool) {
+function returnToStudyAlert() {
 
-    if (bool) {
-        navigator.notification.beep(1);
+    navigator.notification.beep(1);
 
-        navigator.notification.confirm(
-            'Seems like you may have become a little distracted. Have you finished your study session?', // message
-            onConfirmReturn, // callback
-            'Sorry to interrupt, but...', // title
-            ['Take a Break', 'Yes', 'No'] // button labels
-        );
-    }
+    navigator.notification.confirm(
+        'Seems like you may have become a little distracted. Have you finished your study session?', // message
+        onConfirmReturn, // callback
+        'Sorry to interrupt, but...', // title
+        ['Take a Break', 'Yes', 'No'] // button labels
+    );
 
 }
 
@@ -67,18 +65,16 @@ function onConfirmBreak(buttonIndex) {
     }
 }
 
-function takeABreakAlert(bool) {
+function takeABreakAlert() {
 
-    if (bool) {
-        navigator.notification.beep(1);
+    navigator.notification.beep(1);
 
-        navigator.notification.confirm(
-            'Seems like you\'ve been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!', // message
-            onConfirmBreak, // callback
-            'Sorry to interrupt, but...', // title
-            ['Continue Studying', 'Take a Break'] // button labels
-        );
-    }
+    navigator.notification.confirm(
+        'Seems like you\'ve been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!', // message
+        onConfirmBreak, // callback
+        'Sorry to interrupt, but...', // title
+        ['Continue Studying', 'Take a Break'] // button labels
+    );
 
 }
 
@@ -90,6 +86,9 @@ function onConfirmStopMon(buttonIndex) {
     if (buttonIndex == 3) {
         //continue monitoring
         document.getElementById('myonoffswitch').checked = true;
+        document.getElementById("studyPage").innerHTML = "Hit the switch again to pause or finish your study session.";
+
+
     }
     if (buttonIndex == 1) {
         //pause monitoring
@@ -117,13 +116,12 @@ function pausedPrompt() {
     );
 }
 
-function checkStudyReminder() {
+function checkDistractedReminder() {
     var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
     if (localStorage.getItem("score") != null) {
         if (localStorage.getItem("score") > score) {
             if ((localStorage.getItem("score") - score) > 20) {
-                var bool = true;
-                returnToStudyAlert(bool);
+                returnToStudyAlert();
             }
         }
     }
@@ -132,28 +130,21 @@ function checkStudyReminder() {
 }
 
 
-function checkReminder() {
-    var currentT = new Date();
-    var timeSinceBreak = currentT - timeResumed;
+function checkBreakReminder(bool) {
+    if (bool) {
+        var currentT = new Date();
+        var timeSinceBreak = currentT - timeResumed;
 
-    //check if user should consider having a break from studying
-    if (timeSinceBreak > 3000000) { //if time since break is greater than 50 mins (3000000), 60000 1 min
-        var currentScore = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
-        if (currentScore > 60) {
-            //prompt break
-            var breakNotifBool = true; //boolean for notifications on or off
-            takeABreakAlert(breakNotifBool);
-            timeResumed = new Date();
+        //check if user should consider having a break from studying
+        if (timeSinceBreak > getOptimalStudyPeriod()) { //if time since break is greater than 50 mins (3000000), 60000 1 min
+            var currentScore = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+            if (currentScore > 60) {
+                //prompt break
+                takeABreakAlert();
+                timeResumed = new Date();
+            }
         }
     }
-
-    //check if user isn't studying well
-    var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
-    localStorage.setItem("currentScore", score);
-
-    var lastTime = new Date();
-
-
 
 
 }

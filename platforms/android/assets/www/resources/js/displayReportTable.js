@@ -63,9 +63,6 @@ function updateTable() {
     userName.on("child_added", function(snapshot) {
         var newPost = snapshot.val();
         drawData(newPost.date, newPost.time, newPost.duration, newPost.score, newPost.appMessage, newPost.userNotes);
-        console.log("Duration: " + newPost.duration);
-        console.log("Score: " + newPost.score);
-        console.log("Time " + newPost.time);
     });
 }
 

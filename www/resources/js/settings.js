@@ -39,3 +39,41 @@ function timeConvert(duration) {
     var totalTime = Math.round(minutes) + " minutes and " + Math.round(seconds) + " seconds";
     return totalTime;
 }
+
+function handleBreakReminder(breakRemind) {
+    localStorage.setItem("breakNotifBool", breakRemind.value);
+}
+
+function getBreakNotifBool() {
+    if (localStorage.getItem("breakNotifBool") != null) {
+        return localStorage.getItem("breakNotifBool");
+    }
+    else
+        return true;
+}
+
+function handleStudyPeriod(duration) {
+    localStorage.setItem("optimalStudyDuration", ((duration.value * 60) * 1000));
+}
+
+function getOptimalStudyPeriod() {
+    if (localStorage.getItem("optimalStudyDuration") != null) {
+        return localStorage.getItem("optimalStudyDuration");
+    }
+    else
+        return 3000000; //return 50 mins as default value
+}
+
+function handleDistractedReminder(distractedRemind) {
+    localStorage.setItem("distractedRemindBool", distractedRemind.value);
+}
+
+function getDistractedBool() {
+    if (localStorage.getItem("distractedRemindBool") != null) {
+        return localStorage.getItem("distractedRemindBool");
+    }
+    else
+        return true;
+}
+
+
