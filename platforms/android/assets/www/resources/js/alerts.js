@@ -2,11 +2,11 @@ function alertDismissed() {
     // do something
 }
 
-function monitoringEnabled() {
+function customVolumeLevelSet() {
     navigator.notification.alert(
-        'Monitoring has been enabled, get studying!', // message
+        'Custom noise threshold has been set.', // message
         alertDismissed, // callback
-        'Studying Started', // title
+        'Done!', // title
         'OK' // buttonName
     );
 }

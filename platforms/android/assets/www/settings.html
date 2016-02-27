@@ -10,11 +10,17 @@
 
   <link href="resources/css/boilerplate.css" rel="stylesheet" type="text/css">
   <!--<link href="resources/css/index.css" rel="stylesheet" type="text/css">-->
-  <link href="vendors/jquery/slidemenu.hamburger.css" rel="stylesheet" type="text/css">
+  <link href="vendors/jquery/slidemenu.hamburger.scroll.css" rel="stylesheet" type="text/css">
   <link href="resources/css/index.css" rel="stylesheet" type="text/css">
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+
   <script src="cordova.js"></script>
   <script src="resources/js/settings.js"></script>
   <script src="resources/js/settingsPage.js"></script>
+  <script src="resources/js/mic.js"></script>
+    <script src="resources/js/alerts.js"></script>
+
+
 
 
 
@@ -45,18 +51,19 @@
 <div id="content" align="center">
   <div class="userID">
     <form>
-      Current User ID: <div id="userIDname"></div>
-      New User ID:<br>
+      <h3>Current User ID:</h3> <div id="userIDname"></div>
+      <h3>New User ID:</h3>
       <input type="text" id="userIDinput" name="userIDinputName"><br>
       <input type="button" value="Submit" onclick="setUserID()">
       <br>
-      <br>
     </form>
   </div>
+  <hr>
   <div class ="reminders">
-    Break Reminder:
-    <br>
+    <h3>Break Reminder:</h3>
     This allows me to remind you to take a break every so often if you've been studying well.
+    <!-- Using this, the app can remind you to take a break every so often if you've been studing well. -->
+    <br>
     <form action="">
       <input type="radio" name="breakRemind" onclick="handleBreakReminder(this);" value="true" checked="checked"> On<br>
       <input type="radio" name="breakRemind" onclick="handleBreakReminder(this);" value="false"> Off<br>
@@ -71,18 +78,28 @@
         <option value="60">60 Minutes</option>
       </select>
     </div>
-    Here you can select how often you want to study between breaks. Rememeber though, I'll only suggest you have a break if I think you're doing well!
     <br>
+    If you've enabled the break reminder, here you can select how often you want to study between breaks. Rememeber though, I'll only suggest a break if I think you're doing well!
     <br>
-    Back to Studying Reminder:
+    <hr>
+    <h3>Back to Studying Reminder:</h3>
+    <!--This allows me to let you know if it seems you've become distracted.-->
+    Using this, I can notify you if it seems like you've become distracted.
     <br>
-    This allows me to let you know if it seems you've become distracted.
     <form action="">
       <input type="radio" name="distractedRemind" onclick="handleDistractedReminder(this);" value="true" checked="checked"> On<br>
       <input type="radio" name="distractedRemind" onclick="handleDistractedReminder(this);" value="false"> Off<br>
     </form>
 
   </div>
+  <hr>
+  <h3>Surrounding Noise Level:</h3>
+  Using this, you can record the current noise level over the next 10 seconds to set a custom volume threshold for studying. Alternatively, the default value is set to around ordinary conversation.<br>
+  <button type="button" onclick="startRecordingAmbientNoiseLevel(this)">Record Noise Level</button>
+  <button type="button" onclick="localStorage.setItem('ambientNoiseLevel', 6);">Default Value</button>
+
+
+
 
 
 </div>

@@ -21,7 +21,7 @@ function getTime() {
 function setUserID() {
     var userID = document.getElementById('userIDinput').value;
     localStorage.setItem("userID", userID);
-    alert("UserID was set to: " + userID);
+    document.getElementById("userIDname").innerHTML = getUserID();
 }
 
 function getUserID() {

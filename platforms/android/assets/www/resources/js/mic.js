@@ -1,9 +1,19 @@
 // JavaScript Document to handle microphone sensor
-var micStatusOn = false;
-var noisy = false;
-var noisyCount = 0;
+var micStatusOn = false; //boolean to check if mic is on or off
 var vol;
-var ambientNoiseLevel = 6;
+
+
+function getAmbientNoiseLevel() {
+    if (localStorage.getItem("ambientNoiseLevel") != null) {
+        var ambientNoiseLevel = localStorage.getItem("ambientNoiseLevel");
+    } else {
+        var ambientNoiseLevel = 6;
+    }
+
+    return ambientNoiseLevel;
+}
+
+
 
 function successCallback() {
     console.log('Microphone is now on.')
@@ -52,13 +62,13 @@ function readMic(reading) {
     }, errorCallback);
 
     averageVol = totalVol / micCount;
-    if (averageVol > (ambientNoiseLevel + 10) && micCount > 29) {
+    if (averageVol > (getAmbientNoiseLevel() + 10) && micCount > 29) {
         noisyBackground();
         noiseLevel = "vhigh";
-    } else if (averageVol > (ambientNoiseLevel + 5) && micCount > 29) {
+    } else if (averageVol > (getAmbientNoiseLevel() + 5) && micCount > 29) {
         noisyBackground();
         noiseLevel = "high";
-    } else if (averageVol > ambientNoiseLevel && micCount > 29) {
+    } else if (averageVol > getAmbientNoiseLevel() && micCount > 29) {
         noisyBackground();
         noiseLevel = "medium";
     } else if (micCount > 29) {
@@ -82,37 +92,72 @@ function readMic(reading) {
 
 }
 
-
-//Do things on an interval***********
-function micInterval() {
+function recordAmbientNoiseLevel(reading) {
     if (micStatusOn == false) {
+        console.log('Microphone was not on - turning on now.');
         micOn();
     }
-    console.log("Microphone sampling rate: " + micSampleRate);
-    micIntervalNSBool = false; //used to be real false boolean 
 
-    micIntervalCount++;
-    noisyCount = 0;
-    micCount = 0;
-    totalVol = 0;
-    micSensor = setInterval(readMic, 333); //measure values every x seconds
-    setTimeout(stopMicInterval, 10000); //stop reading after x seconds
-}
+    micCount++;
+    micVolume.read(function(reading) {
+        console.log(reading.volume);
+        vol = reading.volume;
+        totalVol = totalVol + vol;
+    }, errorCallback);
 
-function stopMicInterval() {
-    clearInterval(micSensor);
-    clearTimeout(micSensor);
-    clearTimeout(stopMicInterval);
-    micOff();
-}
+    averageVol = totalVol / micCount;
 
-function noisyBackground() {
-    console.log('It is noisy!');
-    micIntervalNSBool = "true";
-    micNotStudying++;
-}
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem("ambientNoiseLevel", (averageVol + 1));
 
-//functions for testing
-function getAverageVolume() {
-    console.log('Average Volume: ' + averageVol);
-}
+        } else {
+            // Sorry! No Web Storage support..
+            console.log("No web storage support - oh dear.");
+        }
+
+    console.log("ambientNoiseLevel: "+localStorage.getItem("ambientNoiseLevel"));
+    }
+
+    function startRecordingAmbientNoiseLevel(button) {
+        button.disabled = true;
+        micCount = 0;
+        totalVol = 0;
+        recordLevel = setInterval(recordAmbientNoiseLevel, 200);
+        setTimeout(function() {
+            clearInterval(recordLevel);
+            micOff();
+            customVolumeLevelSet();
+            button.disabled = false;
+        }, 10000);
+    }
+
+
+    //Do things on an interval***********
+    function micInterval() {
+        console.log("Microphone sampling rate: " + micSampleRate);
+        micIntervalNSBool = false; //used to be real false boolean 
+
+        micIntervalCount++;
+        micCount = 0;
+        totalVol = 0;
+        micSensor = setInterval(readMic, 333); //measure values every x seconds
+        setTimeout(stopMicInterval, 10000); //stop reading after x seconds
+    }
+
+    function stopMicInterval() {
+        clearInterval(micSensor);
+        clearTimeout(micSensor);
+        clearTimeout(stopMicInterval);
+        micOff();
+    }
+
+    function noisyBackground() {
+        console.log('It is noisy!');
+        micIntervalNSBool = "true";
+        micNotStudying++;
+    }
+
+    //functions for testing
+    function getAverageVolume() {
+        console.log('Average Volume: ' + averageVol);
+    }
