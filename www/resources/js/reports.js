@@ -29,32 +29,18 @@ var app = {
 app.initialize();
 
 
-function drawData(date, time, duration, score, appMessage, userNotes) {
+function drawData(date, time, duration, score, appMessage, userNotes, sessionID) {
   //var myTable = "Time: "+time + "<br> Duration: " +duration + "<br> Score: " +score +"<br> <br>";
   var sessionTable = "<table class ='tablerep'> <tr> <td class='tr-95kxB'>Date: </td> <td class='tr-95kx'>" +date + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-yw4lB'>Start Time: </td> <td class='tr-yw4l'>" +time + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-95kxB'>Duration: </td> <td class='tr-95kx'>" +duration + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-yw4lB'>Score: </td> <td class='tr-yw4l'>" +score + "</td> </tr>"
   sessionTable += "<tr> <td class='tr-95kxB'>App Notes: </td> <td class='tr-95kx'>" +appMessage + "</td> </tr>"
-  sessionTable += "<tr> <td class='tr-yw4lB'>User Notes: </td> <td class='tr-yw4l'>" +userNotes + "</td> </tr> </table> <br> <br>"
+  sessionTable += "<tr> <td class='tr-yw4lB'>User Notes: </td> <td class='tr-yw4l'>" +userNotes + "</td> </tr>"
+  sessionTable += "<tr> <td class='tr-yw4lB'>Session ID: </td> <td class='tr-yw4l'>" +sessionID + "</td> </tr> </table> <br> <br>"
 
   document.getElementById('content').innerHTML += sessionTable;
-  // document.write(myTable);
 }
-
-// function drawData(date, time, duration, score, appMessage, userNotes) {
-//   //var myTable = "Time: "+time + "<br> Duration: " +duration + "<br> Score: " +score +"<br> <br>";
-//   var sessionTable = "<table class ="tablerep"> <tr> <td>Date: </td> <td>" +date + "</td> </tr>"
-//   sessionTable += "<tr> <td>Time: </td> <td>" +time + "</td> </tr>"
-//   sessionTable += "<tr> <td>Duration: </td> <td>" +duration + "</td> </tr>"
-//   sessionTable += "<tr> <td>Score: </td> <td>" +score + "</td> </tr>"
-//   sessionTable += "<tr> <td>App Notes: </td> <td>" +appMessage + "</td> </tr>"
-//   sessionTable += "<tr> <td>User Notes: </td> <td>" +userNotes + "</td> </tr> </table> <br> <br>"
-
-//   document.getElementById('content').innerHTML += sessionTable;
-//   // document.write(myTable);
-// }
-
 
 
 
@@ -62,7 +48,7 @@ function drawData(date, time, duration, score, appMessage, userNotes) {
 function updateTable() {
     userName.on("child_added", function(snapshot) {
         var newPost = snapshot.val();
-        drawData(newPost.date, newPost.time, newPost.duration, newPost.score, newPost.appMessage, newPost.userNotes);
+        drawData(newPost.date, newPost.time, newPost.duration, newPost.score, newPost.appMessage, newPost.userNotes, newPost.sessionID);
     });
 }
 

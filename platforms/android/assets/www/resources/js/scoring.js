@@ -1,3 +1,5 @@
+
+//Creates the users current score for the session.
 function createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount) {
     var numberArguments = arguments.length / 2;
     appMessage = "";
@@ -34,28 +36,13 @@ function createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, ac
 
 }
 
+//returns the score for a particular sensor.
 function sensorScore(sensorNSCount, sensorIntervalCount) {
     sensorScore = sensorNSCount / sensorIntervalCount * 100;
     return sensorScore;
 }
 
-function objectSensorScore(sensor) {
-    sensorScore = (sensor.session.intervalNSCount / sensor.session.intervalNSCount) * 100;
-    return sensorScore;
-}
-
-
 
 function getSessionStudyScore() {
     console.log("Score for this session is: " + sessionStudyScore);
-}
-
-function createIntervalStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount) {
-    var numberArguments = arguments.length;
-
-    micIntervalStudyScore = micNotStudying / micIntervalCount * 100;
-    accelIntervalStudyScore = accelNotStudying / accelIntervalCount * 100;
-    intervalStudyScore = (micIntervalStudyScore + accelIntervalStudyScore) / numberArguments;
-
-    return intervalStudyScore;
 }

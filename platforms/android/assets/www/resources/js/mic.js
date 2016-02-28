@@ -146,20 +146,22 @@ function recordAmbientNoiseLevel(reading) {
 
 //Loop the microphone sensor
 function startRecordingAmbientNoiseLevel(button) {
+    customVolumeLevelRecording();
     recordingNoiseLevel = true;
     micOff();
     micOn();
-    button.disabled = true;
+    button.disabled = true; //disable the button
     micCount = 0;
     totalVol = 0;
     recordLevel = setInterval(recordAmbientNoiseLevel, 200);
     setTimeout(killNoiseLevelRecording, 10000);
     setTimeout(function() {
-        button.disabled = false; }
+        button.disabled = false; } //enable the button again
         , 10000)
 }
 
 function killNoiseLevelRecording() {
+    customVolumeLevelSet();
     recordingNoiseLevel = false;
     clearInterval(recordLevel);
     clearTimeout(recordLevel);

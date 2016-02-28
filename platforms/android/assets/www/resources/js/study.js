@@ -47,6 +47,7 @@ var app = {
                 e.preventDefault();
             }
         });
+
     },
 };
 
@@ -59,6 +60,8 @@ function startMonitoringSensors() {
         //Begin timer
         initialiseTimer();
         startTimer();
+
+        updateScore = setInterval(scoreOnStudyPage, 60000);
 
         //Check if the user wants to be reminded if they are too distracted.
         if (getDistractedBool) {
@@ -89,6 +92,8 @@ function stopMonitoringSensors() {
     stopTimer(); //stop counting the timer
     document.getElementById('myonoffswitch').checked = false;
 
+    clearInterval(updateScore);
+
 
     //no longer used, was for getting session duration
     //timeStop = new Date(); 
@@ -114,13 +119,14 @@ function stopMonitoringSensors() {
 
 }
 
+//restart the accelerometer sensor with the new sample rate
 function restartAccelSensor(sampleRate) {
     clearInterval(accelMonSensor);
     clearTimeout(accelMonSensor);
     accelMonSensor = setInterval(accelInterval, sampleRate);
     console.log('Accelerometer restarted with a samplerate of: ' + sampleRate);
 }
-
+//restart the microphone sensor with the new sample rate
 function restartMicSensor(sampleRate) {
     clearInterval(micMonSensor);
     clearTimeout(micMonSensor);
@@ -146,7 +152,7 @@ function resumeMonitoring() {
 
     accelMonSensor = setInterval(accelInterval, accelSampleRate); //starts monitoring the sensor every X milliseconds
     micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
-    durationPaused = timeResumed - timePaused;
+    durationPaused = timeResumed - timePaused; //keep track of duration of pausing
     totalDurationPaused += durationPaused;
 
     document.getElementById('myonoffswitch').checked = true;
@@ -155,9 +161,6 @@ function resumeMonitoring() {
 
 }
 
-// function askUserNotes() {
-//     userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
-// }
 
 function getUserNotes() {
     if (userNotes != null) {
@@ -166,12 +169,15 @@ function getUserNotes() {
         return " ";
 }
 
-function getDuration() {
-    var timeNow = new Date();
-    var duration = (timeNow - timeBegin)
-}
+
+//Old method of finding the duration studied for, deprecated for getting duration from the timer (keeps duration and timer in sync)
+// function getDuration() {
+//     var timeNow = new Date();
+//     var duration = (timeNow - timeBegin)
+// }
 
 function initialiseMonitoring() {
+    document.getElementById("studyPageScore").innerHTML = ""; //clear the previous score from the page.
     firstRun = true; //var to check if the phone has to indentify the speed at which accel can be checked
     timeResumed = new Date(); //for checking if user should have break (used to get duration since last break)
 
@@ -190,7 +196,7 @@ function initialiseMonitoring() {
     sensorSteadyCount = 0;
     sensorFluctuatingCount = 0;
 
-    //
+    
     micIntervalCount = 0; //no. of intervals within a session
     micNotStudying = 0; //no. of intervals within a session that user was not studying
     accelIntervalCount = 0; //no. of intervals within a session
@@ -202,18 +208,17 @@ function initialiseMonitoring() {
 
 }
 
+//stop the sensors being scanned right now
 function killSensors() {
     stopAccelInterval();
     stopMicInterval();
     return true;
 }
 
-function leaveStudyPage() {
-    if (statusOn) {
-        return false;
-    } else
-        return true;
+function scoreOnStudyPage () {
+    document.getElementById("studyPageScore").innerHTML = "Score: " + createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount) + " / 100";
 }
+
 
 // function askUserNotes() {
 //     userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
