@@ -17,6 +17,20 @@ var app = {
     onDeviceReady: function() {
         document.getElementById("userIDname").innerHTML = getUserID();
 
+        recordingNoiseLevel = false;
+
+        $('.leave-settings').click(function(e) {
+            if (recordingNoiseLevel) {
+                e.preventDefault();
+                stillRecordingNoiseLevelWarning();
+            }
+        });
+        $('.same-page').click(function(e) {
+            if (recordingNoiseLevel) {
+                e.preventDefault();
+            }
+        });
+
 
     },
 };

@@ -11,21 +11,30 @@ function customVolumeLevelSet() {
     );
 }
 
+function stillRecordingNoiseLevelWarning() {
+        navigator.notification.alert(
+        'Still detecting the surrounding noise level. Please wait a few more seconds.', // message
+        alertDismissed, // callback
+        'Hang on a Moment!', // title
+        'OK' // buttonName
+    );
+}
 
 
-// function askUserNotes() {
-// navigator.notification.prompt(
-//     'This is an opportunity to enter any notes you wish to remember about this session',  // message
-//     onPrompt,                  // callback to invoke
-//     'User Notes',            // title
-//     ['Ok'],             // buttonLabels
-//     ' '                 // defaultText
-// );
-// }
+function askUserNotes() {
+navigator.notification.prompt(
+    'This is an opportunity to enter any notes you wish to remember about this session',  // message
+    onPrompt,                  // callback to invoke
+    'User Notes',            // title
+    ['Ok'],             // buttonLabels
+    ' '                 // defaultText
+);
+}
 
 function onPrompt(results) {
-    //userNotes = results.input1;
-    localStorage.setItem("userNotes", results.input1);
+    userNotes = results.input1;
+    //localStorage.setItem("userNotes", results.input1);
+    pushData();
 }
 
 function onConfirmReturn(buttonIndex) {
@@ -82,13 +91,12 @@ function onConfirmStopMon(buttonIndex) {
     if (buttonIndex == 2) {
         //stop monitoring
         stopMonitoringSensors();
+        
     }
     if (buttonIndex == 3) {
         //continue monitoring
         document.getElementById('myonoffswitch').checked = true;
         document.getElementById("studyPage").innerHTML = "Hit the switch again to pause or finish your study session.";
-
-
     }
     if (buttonIndex == 1) {
         //pause monitoring

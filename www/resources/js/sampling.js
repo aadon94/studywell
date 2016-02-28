@@ -19,18 +19,7 @@ function decreaseSampleRate(currentRate) {
     }
 }
 
-function initialiseMonitoring() {
-    totalDurationPaused = 0;
-    accelSampleRate = 30000;
-    micSampleRate = 30000;
-    micSteadyScoreCount = 0;
-    micFluctuatingScoreCount = 0;
-    accelSteadyScoreCount = 0;
-    accelFluctuatingScoreCount = 0;
-    sensorSteadyCount = 0;
-    sensorFluctuatingCount = 0;
 
-}
 
 
 // function updateSamplingRate() {
