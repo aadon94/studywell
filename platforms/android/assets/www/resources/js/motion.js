@@ -56,7 +56,7 @@ function onSuccessAcc(acceleration) {
         //As long as this isn't the first time this method is running, check if the sample rate needs updated.
         if (localStorage.getItem("oldAccelIntervalNSBool") != null) {
             //console.log('running updateSampleR');
-            updateSampleRate(accelIntervalNSBool, accelSampleRate, localStorage.getItem("oldAccelIntervalNSBool"), "accelerometer");
+            //updateSampleRate(accelIntervalNSBool, accelSampleRate, localStorage.getItem("oldAccelIntervalNSBool"), "accelerometer");
         }
         //This is so we can compare the values from this interval and the previous interval
         if (typeof(Storage) !== "undefined") {
