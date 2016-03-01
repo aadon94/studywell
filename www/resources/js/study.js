@@ -49,6 +49,12 @@ var app = {
             }
         });
 
+        cordova.plugins.backgroundMode.setDefaults({
+    title:  String,
+    ticker: String,
+    text:   String
+})
+
 
 
 
