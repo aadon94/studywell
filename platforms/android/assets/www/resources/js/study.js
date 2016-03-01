@@ -3,6 +3,7 @@ var timeBegin;
 var timeStop;
 var sessionDuration;
 var userNotes;
+var wakeLock;
 
 var app = {
     // Application Constructor
@@ -48,6 +49,9 @@ var app = {
             }
         });
 
+
+
+
         //if user clicks back button whilst monitoring
         document.addEventListener("backbutton", onBackKeyDown, false);
 
@@ -59,6 +63,11 @@ app.initialize();
 
 function startMonitoringSensors() {
     if (statusOn === false) {
+
+        //continue monitoring even if device screen switches off
+        enableWakeLock();
+
+
         document.getElementById("studyPage").innerHTML = "Hit the switch again to pause or finish your study session.";
 
         //Begin timer
@@ -101,6 +110,10 @@ function tryStopMonitoringSensors() {
 
 //Stop monitoring the sensors and send data to backend
 function stopMonitoringSensors() {
+
+    //let the device sleep if screen switches off
+    disableWakeLock();
+
     stopTimer(); //stop counting the timer
     document.getElementById('myonoffswitch').checked = false;
 
@@ -151,6 +164,10 @@ function restartMicSensor(sampleRate) {
 }
 
 function pauseMonitoring() {
+
+    //let the device sleep if screen switches off
+    disableWakeLock();
+
     document.getElementById("studyPage").innerHTML = "";
     stopTimer();
     timePaused = new Date();
@@ -168,6 +185,9 @@ function pauseMonitoring() {
 }
 
 function resumeMonitoring() {
+
+    //continue monitoring even if device screen switches off
+    enableWakeLock();
     checkScore(); //set the score to be compared against when looking if break should be suggested
     startTimer();
     timeResumed = new Date();
@@ -249,6 +269,32 @@ function onBackKeyDown() {
     if (statusOn) {
         stopMonitoringPrompt();
     }
+}
+
+function enableWakeLock() {
+
+    cordova.plugins.backgroundMode.enable();
+    window.powerManagement.dim(function() {
+        console.log('Wakelock acquired');
+    }, function() {
+        console.log('Failed to acquire wakelock');
+    });
+    window.powerManagement.setReleaseOnPause(false, function() {
+        console.log('setReleaseOnPause successfully');
+    }, function() {
+        console.log('Failed to set');
+    });
+
+    wakelock = true;
+}
+
+function disableWakeLock() {
+    cordova.plugins.backgroundMode.disable();
+    window.powerManagement.release(function() {
+        console.log('Wakelock released');
+    }, function() {
+        console.log('Failed to release wakelock');
+    });
 }
 
 

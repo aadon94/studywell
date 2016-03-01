@@ -33,20 +33,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-geolocation/www/android/geolocation.js",
-        "id": "cordova-plugin-geolocation.geolocation",
-        "pluginId": "cordova-plugin-geolocation",
-        "clobbers": [
-            "navigator.geolocation"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
-        "id": "cordova-plugin-geolocation.PositionError",
-        "pluginId": "cordova-plugin-geolocation",
-        "runs": true
-    },
-    {
         "file": "plugins/cordova-plugin-whitelist/whitelist.js",
         "id": "cordova-plugin-whitelist.whitelist",
         "pluginId": "cordova-plugin-whitelist",
@@ -67,6 +53,31 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device/www/device.js",
+        "id": "cordova-plugin-device.device",
+        "pluginId": "cordova-plugin-device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-background-mode/www/background-mode.js",
+        "id": "cordova-plugin-background-mode.BackgroundMode",
+        "pluginId": "cordova-plugin-background-mode",
+        "clobbers": [
+            "cordova.plugins.backgroundMode",
+            "plugin.backgroundMode"
+        ]
+    },
+    {
+        "file": "plugins/at.gofg.sportscomputer.powermanagement/www/powermanagement.js",
+        "id": "at.gofg.sportscomputer.powermanagement.device",
+        "pluginId": "at.gofg.sportscomputer.powermanagement",
+        "clobbers": [
+            "window.powerManagement"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -75,9 +86,11 @@ module.exports.metadata =
     "com.lampa.startapp": "0.0.5",
     "com.shukriadams.micVolume": "0.1.0",
     "cordova-plugin-device-motion": "1.2.0",
-    "cordova-plugin-geolocation": "2.1.1-dev",
     "cordova-plugin-whitelist": "1.2.1",
-    "cordova-plugin-dialogs": "1.2.0"
+    "cordova-plugin-dialogs": "1.2.0",
+    "cordova-plugin-device": "1.1.1",
+    "cordova-plugin-background-mode": "0.6.5",
+    "at.gofg.sportscomputer.powermanagement": "1.1.0"
 }
 // BOTTOM OF METADATA
 });
