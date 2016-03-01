@@ -1,7 +1,7 @@
 //class to control sampling rates of sensors
 
 function increaseSampleRate(currentRate) {
-    if (currentRate > 30000) {
+    if (currentRate > 30000) { //highest sampling rate is 30 seconds
         var newRate = currentRate - 30000;
         return newRate;
     } else {
@@ -11,7 +11,7 @@ function increaseSampleRate(currentRate) {
 }
 
 function decreaseSampleRate(currentRate) {
-    if (currentRate < 1200000) {
+    if (currentRate < 300000) { //slowest sampling rate is 5 minutes
         var newRate = currentRate + 30000;
         return newRate;
     } else {
