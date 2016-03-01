@@ -10,11 +10,17 @@
 
   <link href="resources/css/boilerplate.css" rel="stylesheet" type="text/css">
   <!--<link href="resources/css/index.css" rel="stylesheet" type="text/css">-->
-  <link href="vendors/jquery/slidemenu.hamburger.css" rel="stylesheet" type="text/css">
+  <link href="vendors/jquery/slidemenu.hamburger.scroll.css" rel="stylesheet" type="text/css">
   <link href="resources/css/index.css" rel="stylesheet" type="text/css">
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+
   <script src="cordova.js"></script>
   <script src="resources/js/settings.js"></script>
   <script src="resources/js/settingsPage.js"></script>
+  <script src="resources/js/mic.js"></script>
+  <script src="resources/js/alerts.js"></script>
+
+
 
 
 
@@ -31,61 +37,73 @@
     <div class="title amburger-action">Settings</div>
   </header>
 
-    <nav class="clear">
-      <ul>
-        <li><a href="index.html">Study Time</a></li>
-        <li><a href="schedule.html">Schedule</a></li> 
-        <li><a href="reports.html">Reports</a></li>
-        <li><a href="settings.html">Settings</a></li>
-        <li><a href="help.html">Help</a></li>
-      </ul>
-    </nav>
+  <nav class="clear">
+    <ul>
+      <li><a href="index.html" class="leave-settings">Study Time</a></li>
+      <li><a href="schedule.html" class="leave-settings">Schedule</a></li> 
+      <li><a href="reports.html" class="leave-settings">Reports</a></li>
+      <li><a href="settings.html" class="same-page">Settings</a></li>
+      <li><a href="help.html" class="leave-settings">Help</a></li>
+      <li><a href="#" onclick="window.open('https://docs.google.com/forms/d/1uZ3MqweHP81HR19M8IqSFBJcJMG_Ht78fJMcGzmvHiY/viewform', '_system');" class="leave-studying">Post-Session Questionnaire</a></li>
+    </ul>
+  </nav>
 
 
-<div id="content" align="center">
-  <div class="userID">
-    <form>
-      Current User ID: <div id="userIDname"></div>
-      New User ID:<br>
-      <input type="text" id="userIDinput" name="userIDinputName"><br>
-      <input type="button" value="Submit" onclick="setUserID()">
-      <br>
-      <br>
-    </form>
-  </div>
-  <div class ="reminders">
-    Break Reminder:
-    <br>
-    This allows me to remind you to take a break every so often if you've been studying well.
-    <form action="">
-      <input type="radio" name="breakRemind" onclick="handleBreakReminder(this);" value="true" checked="checked"> On<br>
-      <input type="radio" name="breakRemind" onclick="handleBreakReminder(this);" value="false"> Off<br>
-    </form>
-    <br>
-    <div>
-      <select onchange="handleStudyPeriod(this)">
-        <option value="20">20 Minutes</option>
-        <option value="30">30 Minutes</option>
-        <option value="40">40 Minutes</option>
-        <option selected="selected" value="50">50 Minutes</option>
-        <option value="60">60 Minutes</option>
-      </select>
+  <div id="content" align="center">
+    <div class="userID">
+      <form>
+        <h3>Current User ID:</h3> <div id="userIDname"></div>
+        <h3>New User ID:</h3>
+        <input type="text" id="userIDinput" name="userIDinputName"><br>
+        <input type="button" value="Submit" onclick="setUserID()">
+        <br>
+      </form>
     </div>
-    Here you can select how often you want to study between breaks. Rememeber though, I'll only suggest you have a break if I think you're doing well!
-    <br>
-    <br>
-    Back to Studying Reminder:
-    <br>
-    This allows me to let you know if it seems you've become distracted.
-    <form action="">
-      <input type="radio" name="distractedRemind" onclick="handleDistractedReminder(this);" value="true" checked="checked"> On<br>
-      <input type="radio" name="distractedRemind" onclick="handleDistractedReminder(this);" value="false"> Off<br>
-    </form>
+    <hr>
+    <div class ="reminders">
+      <h3>Break Reminder:</h3>
+      This allows me to remind you to take a break every so often if you've been studying well.
+      <!-- Using this, the app can remind you to take a break every so often if you've been studing well. -->
+      <br>
+      <form action="">
+        <input type="radio" name="breakRemind" id="breakOn" onclick="handleBreakReminder(this);" value="true" checked="checked"> On<br>
+        <input type="radio" name="breakRemind" id="breakOff" onclick="handleBreakReminder(this);" value="false"> Off<br>
+      </form>
+      <br>
+      <div>
+        <select id="handleSP" onchange="handleStudyPeriod(this)">
+          <option value="20" id="20" >20 Minutes</option>
+          <option value="30" id="30" >30 Minutes</option>
+          <option value="40" id="40" >40 Minutes</option>
+          <option selected="selected" value="50"  id="50" >50 Minutes</option>
+          <option value="60" id="60" >60 Minutes</option>
+        </select>
+      </div>
+      <br>
+      If you've enabled the break reminder, here you can select how often you want to study between breaks. Rememeber though, I'll only suggest a break if I think you're doing well!
+      <br>
+      <hr>
+      <h3>Distraction Reminder:</h3>
+      <!--This allows me to let you know if it seems you've become distracted.-->
+      Using this, I can notify you if it seems like you've been significantly distracted for too long.
+      <br>
+      <form name="distracted">
+        <input type="radio" id="distractOn" name="distractedRemind" onclick="handleDistractedReminder(this);" value="true" checked="true"> On<br>
+        <input type="radio" id="distractOff" name="distractedRemind" onclick="handleDistractedReminder(this);" value="false"> Off<br>
+      </form>
+
+    </div>
+    <hr>
+    <h3>Surrounding Noise Level:</h3>
+    Using this, you can record the current noise level over the next 10 seconds to set a custom volume threshold for studying. Alternatively, the default value is set to around the level of ordinary conversation.<br>
+    <button type="button" onclick="startRecordingAmbientNoiseLevel(this)">Record Noise Level</button>
+    <button type="button" onclick="defaultVolumeLevelSet()">Default Value</button>
+
+
+
+
 
   </div>
-
-
-</div>
 </div>
 
 </body>

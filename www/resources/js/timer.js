@@ -67,26 +67,11 @@ function stopTimer() {
     clearTimeout(t);
 }
 
-// function getDurationTimer(hour, minute, second) {
-//     var duration;
-//     if (hour == 1) {
-//         duration = hour + " hour, " + minute + " minutes and " + second + " seconds";
-//     } else if (hour > 1) {
-//         duration = hour + " hour, " + minute + " minutes and " + second + " seconds";
-//     } else if (minutes == 1) {
-//         duration = minute + " minute and " + second + " seconds";
-//     } else if (minutes > 1) {
-//         duration = minute + " minutes and " + second + " seconds";
-//     } else {
-//         duration = second + " seconds";
-//     }
-//     return duration;
 
-// }
 function getDurationTimer() {
     var duration;
     if (hours == 1) {
-        duration = hours + " hours, " + minutes + " minutes and " + seconds + " seconds";
+        duration = hours + " hour, " + minutes + " minutes and " + seconds + " seconds";
     } else if (hours > 1) {
         duration = hours + " hours, " + minutes + " minutes and " + seconds + " seconds";
     } else if (minutes == 1) {

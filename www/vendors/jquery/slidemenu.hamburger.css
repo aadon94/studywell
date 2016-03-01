@@ -4,7 +4,7 @@ body {
   padding: 0;
   background: #eee;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 a { text-decoration: none; }
@@ -43,7 +43,7 @@ header {
 }
 
 #content {
-  background-color: #eee;
+  /*background-color: #eee;*/
   padding: 52px 10px 10px 10px;
   position: relative;
   width: auto;
@@ -110,5 +110,5 @@ nav li a {
   width: 100%;
   z-index: 1;
   opacity: 0;
-  background: #000;
+  /*background: #000;*/
 }

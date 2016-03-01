@@ -1,54 +1,36 @@
-// JavaScript Document to handle settings
-var currentdatetime = new Date();
-
-function getDate() {
-	var day = ('0' + currentdatetime.getDate()).slice(-2);
-	var month = ('0' + (currentdatetime.getMonth()+1)).slice(-2);
-
-    var currentDate = day + "/" + month + "/" + currentdatetime.getFullYear();
-    return currentDate;
-}
-
-function getTime() {
-	var hours = ('0' + currentdatetime.getHours()).slice(-2);
-	var minutes = ('0' + currentdatetime.getMinutes()).slice(-2);
-	var seconds = ('0' + currentdatetime.getSeconds()).slice(-2);
-
-    var currentTime = hours + ":" + minutes + ":" + seconds;
-    return currentTime;
-}
-
+//set a new user ID
 function setUserID() {
     var userID = document.getElementById('userIDinput').value;
     localStorage.setItem("userID", userID);
-    alert("UserID was set to: " + userID);
+    document.getElementById("userIDname").innerHTML = getUserID();
 }
 
+//return the users ID
 function getUserID() {
-
     if (localStorage.getItem("userID") == null) {
         return "User ID is not set";
     } else
         return localStorage.getItem("userID");
 }
 
-function timeConvert(duration) {
-    var minutes = (duration / 1000) / 60;
-    var seconds = (duration / 1000) % 60;
 
-    var totalTime = Math.round(minutes) + " minutes and " + Math.round(seconds) + " seconds";
-    return totalTime;
-}
-
+//---------------------Study breaks-------------------------------------------
 function handleBreakReminder(breakRemind) {
     localStorage.setItem("breakNotifBool", breakRemind.value);
+
+    if (breakRemind.value == "true") {
+        document.getElementById("handleSP").disabled = false;
+    }
+    if (breakRemind.value == "false") {
+        document.getElementById("handleSP").disabled = true;
+    }
 }
 
+//Check if the user wants to be reminded to take a break
 function getBreakNotifBool() {
     if (localStorage.getItem("breakNotifBool") != null) {
         return localStorage.getItem("breakNotifBool");
-    }
-    else
+    } else
         return true;
 }
 
@@ -56,14 +38,17 @@ function handleStudyPeriod(duration) {
     localStorage.setItem("optimalStudyDuration", ((duration.value * 60) * 1000));
 }
 
+//How long the user wants to study well for before being reminded to take a break
 function getOptimalStudyPeriod() {
     if (localStorage.getItem("optimalStudyDuration") != null) {
         return localStorage.getItem("optimalStudyDuration");
-    }
-    else
+    } else
         return 3000000; //return 50 mins as default value
 }
+//---------------------End of study breaks-------------------------------------------
 
+
+//Check if the user wants to be reminded when they've been too distracted
 function handleDistractedReminder(distractedRemind) {
     localStorage.setItem("distractedRemindBool", distractedRemind.value);
 }
@@ -71,9 +56,6 @@ function handleDistractedReminder(distractedRemind) {
 function getDistractedBool() {
     if (localStorage.getItem("distractedRemindBool") != null) {
         return localStorage.getItem("distractedRemindBool");
-    }
-    else
+    } else
         return true;
 }
-
-
