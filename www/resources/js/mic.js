@@ -74,7 +74,7 @@ function readMic(reading) {
     //As long as this isn't the first time this method is running, check if the sample rate needs updated.
     if (localStorage.getItem("oldMicIntervalNSBool") != null) {
         //console.log('running updateSampleR');
-        updateSampleRate(micIntervalNSBool, micSampleRate, localStorage.getItem("oldMicIntervalNSBool"), "microphone");
+        //updateSampleRate(micIntervalNSBool, micSampleRate, localStorage.getItem("oldMicIntervalNSBool"), "microphone");
     }
 
     //This is so we can compare the values from this interval and the previous interval
