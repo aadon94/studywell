@@ -16,15 +16,22 @@
         "cordova-plugin-device-motion": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
         "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-background-mode": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "at.gofg.sportscomputer.powermanagement": {
+            "PACKAGE_NAME": "com.adamdon.sw"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        }
+    }
 }
