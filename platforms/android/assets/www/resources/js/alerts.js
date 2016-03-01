@@ -1,3 +1,5 @@
+var breakAlertUp = false;
+
 //Alert the user they have successfully set a custom ambient noise level
 function customVolumeLevelSet() {
     navigator.notification.alert(
@@ -161,17 +163,19 @@ function onConfirmReturn(buttonIndex) {
 function takeABreakAlert() {
 
     navigator.notification.beep(1);
-
-    navigator.notification.confirm(
-        'Seems like you\'ve been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!', // message
-        onConfirmBreak, // callback
-        'Sorry to interrupt, but...', // title
-        ['Continue Studying', 'Take a Break'] // button labels
-    );
-
+    if (breakAlertUp != true) {
+        breakAlertUp = true;
+        navigator.notification.confirm(
+            'Seems like you\'ve been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!', // message
+            onConfirmBreak, // callback
+            'Sorry to interrupt, but...', // title
+            ['Continue Studying', 'Take a Break'] // button labels
+        );
+    }
 }
 
 function onConfirmBreak(buttonIndex) {
+    breakAlertUp = false;
     if (buttonIndex == 1) {
         //continue monitoring (do nothing)
     }

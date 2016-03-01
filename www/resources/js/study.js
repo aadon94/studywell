@@ -50,10 +50,9 @@ var app = {
         });
 
         cordova.plugins.backgroundMode.setDefaults({
-    title:  String,
-    ticker: String,
-    text:   String
-})
+            title: "Session In Progress",
+            text: "StudyWell is running in the background."
+        })
 
 
 

@@ -49,6 +49,11 @@ var app = {
             }
         });
 
+        cordova.plugins.backgroundMode.setDefaults({
+            title: "Session In Progress",
+            text: "StudyWell is running in the background."
+        })
+
 
 
 
