@@ -27,6 +27,9 @@
     <feature name="PowerManagement">
         <param name="android-package" value="org.apache.cordova.powermanagement.PowerManagement" />
     </feature>
+    <feature name="LocalNotification">
+        <param name="android-package" value="de.appplant.cordova.plugin.localnotification.LocalNotification" />
+    </feature>
     <allow-intent href="market:*" />
     <name>StudyWell</name>
     <description>
