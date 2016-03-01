@@ -122,6 +122,7 @@ function checkDistractedReminder() {
         if (localStorage.getItem("score") > score) {
             if ((localStorage.getItem("score") - score) > 15) {
                 returnToStudyAlert();
+                returnToStudyNotif();
             }
         }
     }
@@ -154,6 +155,14 @@ function onConfirmReturn(buttonIndex) {
     if (buttonIndex == 3) {
         //continue monitoring (do nothing)
     }
+}
+
+function returnToStudyNotif() {
+    cordova.plugins.notification.local.schedule({
+        id: 20,
+        title: "Sorry to interrupt, but...",
+        text: "Seems like you may have become a little distracted. Have you finished your study session?"
+    });
 }
 //End of Alert the user that they've been distracted for a while-------------------------------------------------
 
@@ -191,18 +200,27 @@ function checkBreakReminder() {
 
 
     //check if user should consider having a break from studying
-    if (timeSinceBreak > getOptimalStudyPeriod()) { //if time since break is greater than 50 mins (3000000), 60000 1 min
+    if (timeSinceBreak > 30000) { //if time since break is greater than 50 mins (3000000), 60000 1 min
         var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
         if (localStorage.getItem("oldScore") != null) {
             if ((localStorage.getItem("oldScore") - 5) <= score) {
                 if (score > 60) {
                     //prompt break
+                    takeABreakNotif();
                     takeABreakAlert();
                     timeResumed = new Date();
                 }
             }
         }
     }
+}
+
+function takeABreakNotif() {
+    cordova.plugins.notification.local.schedule({
+        id: 10,
+        title: "Sorry to interrupt, but...",
+        text: "Seems like you've been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!"
+    });
 }
 
 function checkScore() {

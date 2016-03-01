@@ -27,10 +27,16 @@
         },
         "at.gofg.sportscomputer.powermanagement": {
             "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.adamdon.sw"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.adamdon.sw"
         }
     }
