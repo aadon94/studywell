@@ -67,6 +67,7 @@ function onPrompt(results) {
 
 //Confirmation for stopping monitoring, also gives option to pause monitoring---------------- 
 function stopMonitoringPrompt() {
+    document.getElementById('myonoffswitch').checked = true;
     navigator.notification.confirm(
         'Do you want to end this study session?', // message
         onConfirmStopMon, // callback
@@ -117,7 +118,7 @@ function checkDistractedReminder() {
     var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
     if (localStorage.getItem("score") != null) {
         if (localStorage.getItem("score") > score) {
-            if ((localStorage.getItem("score") - score) > 20) {
+            if ((localStorage.getItem("score") - score) > 15) {
                 returnToStudyAlert();
             }
         }
@@ -180,22 +181,29 @@ function onConfirmBreak(buttonIndex) {
     }
 }
 
-function checkBreakReminder(bool) {
-    if (bool) {
-        var currentT = new Date();
-        var timeSinceBreak = currentT - timeResumed;
+function checkBreakReminder() {
+    var currentT = new Date();
+    var timeSinceBreak = currentT - timeResumed;
 
-        //check if user should consider having a break from studying
-        if (timeSinceBreak > getOptimalStudyPeriod()) { //if time since break is greater than 50 mins (3000000), 60000 1 min
-            var currentScore = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
-            if (currentScore > 60) {
-                //prompt break
-                takeABreakAlert();
-                timeResumed = new Date();
+
+    //check if user should consider having a break from studying
+    if (timeSinceBreak > getOptimalStudyPeriod()) { //if time since break is greater than 50 mins (3000000), 60000 1 min
+        var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
+        if (localStorage.getItem("oldScore") != null) {
+            if ((localStorage.getItem("oldScore") - 5) <= score) {
+                if (score > 60) {
+                    //prompt break
+                    takeABreakAlert();
+                    timeResumed = new Date();
+                }
             }
         }
     }
+}
 
+function checkScore() {
+    var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);;
+    localStorage.setItem("oldScore", score);
 
 }
 

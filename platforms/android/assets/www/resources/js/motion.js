@@ -83,7 +83,6 @@ function readAccel() {
 
 //Loop the accelerometer sensor reading to pulse every one second for 10 seconds.
 function accelInterval() {
-    checkBreakReminder(getBreakNotifBool()); //check if the user should consider having a break
     //localStorage.setItem("oldAccelIntervalNotStudyingBool", "initial");
     accelPulseCount = 0; //this is a count of how many pulses the accelerometer sensor has read (how many pulses within this interval) 
 

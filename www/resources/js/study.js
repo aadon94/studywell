@@ -48,6 +48,10 @@ var app = {
             }
         });
 
+        //if user clicks back button whilst monitoring
+        document.addEventListener("backbutton", onBackKeyDown, false);
+
+
     },
 };
 
@@ -69,6 +73,15 @@ function startMonitoringSensors() {
             studyCheck = setInterval(checkDistractedReminder, 1200000); //timer to check if the users score has dropped significantly in the last 20 mins
         }
 
+        //Check if the user wants to be reminded of breaks
+        if (getBreakNotifBool()) {
+            // setTimeout(checkBreakReminder, 600000); //first check begins at 10 mins in (score would be 100 if we did it immediately and cause the next check to immeditately flag)
+            // breakCheck = setInterval(checkBreakReminder, 1200000); //timer to check if the users score has dropped significantly in the last 20 mins
+            setTimeout(checkScore, 300000); //first check begins at 10 mins in (score would be 100 if we did it immediately and cause the next check to immeditately flag)
+            //scoreChecker = setInterval(checkScore, 300000);
+            breakCheck = setInterval(checkBreakReminder, 60000); //check if the user should consider having a break every minute
+        }
+
         //reset variables before beginning
         initialiseMonitoring();
 
@@ -83,7 +96,6 @@ function startMonitoringSensors() {
 function tryStopMonitoringSensors() {
     if (statusOn === true) {
         stopMonitoringPrompt();
-        document.getElementById("studyPage").innerHTML = "";
     }
 }
 
@@ -93,14 +105,18 @@ function stopMonitoringSensors() {
     document.getElementById('myonoffswitch').checked = false;
 
     clearInterval(updateScore);
+    clearTimeout()
 
 
     //no longer used, was for getting session duration
     //timeStop = new Date(); 
     //sessionDuration = (timeStop - timeBegin) - totalDurationPaused;
 
-    if (getDistractedBool) {
+    if (getDistractedBool()) {
         clearInterval(studyCheck);
+    }
+    if (getBreakNotifBool()) {
+        clearInterval(breakCheck);
     }
     clearInterval(accelMonSensor);
     clearInterval(micMonSensor);
@@ -115,7 +131,7 @@ function stopMonitoringSensors() {
 
     //ask the user if they want to add any notes and push data after it.
     askUserNotes();
-    document.getElementById("studyPage").innerHTML = "Hit the switch above to start a study session!";
+    document.getElementById("studyPage").innerHTML = "Hit the switch above to start a new study session!";
 
 }
 
@@ -135,9 +151,14 @@ function restartMicSensor(sampleRate) {
 }
 
 function pauseMonitoring() {
+    document.getElementById("studyPage").innerHTML = "";
     stopTimer();
     timePaused = new Date();
     document.getElementById('myonoffswitch').checked = false;
+
+    if (getBreakNotifBool()) {
+        clearInterval(breakCheck);
+    }
 
     clearInterval(accelMonSensor);
     clearInterval(micMonSensor);
@@ -147,6 +168,7 @@ function pauseMonitoring() {
 }
 
 function resumeMonitoring() {
+    checkScore(); //set the score to be compared against when looking if break should be suggested
     startTimer();
     timeResumed = new Date();
 
@@ -154,6 +176,10 @@ function resumeMonitoring() {
     micMonSensor = setInterval(micInterval, micSampleRate); //starts monitoring the sensor every X milliseconds
     durationPaused = timeResumed - timePaused; //keep track of duration of pausing
     totalDurationPaused += durationPaused;
+
+    if (getBreakNotifBool()) {
+        breakCheck = setInterval(checkBreakReminder, 60000); //check if the user should consider having a break every minute
+    }
 
     document.getElementById('myonoffswitch').checked = true;
     document.getElementById("studyPage").innerHTML = "Hit the switch again to pause or finish your study session.";
@@ -185,6 +211,9 @@ function initialiseMonitoring() {
 
     micOff();
 
+    localStorage.removeItem("oldScore");
+
+
 
     totalDurationPaused = 0;
     accelSampleRate = 30000;
@@ -196,7 +225,7 @@ function initialiseMonitoring() {
     sensorSteadyCount = 0;
     sensorFluctuatingCount = 0;
 
-    
+
     micIntervalCount = 0; //no. of intervals within a session
     micNotStudying = 0; //no. of intervals within a session that user was not studying
     accelIntervalCount = 0; //no. of intervals within a session
@@ -215,8 +244,11 @@ function killSensors() {
     return true;
 }
 
-function scoreOnStudyPage () {
-    document.getElementById("studyPageScore").innerHTML = "Score: " + createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount) + " / 100";
+
+function onBackKeyDown() {
+    if (statusOn) {
+        stopMonitoringPrompt();
+    }
 }
 
 

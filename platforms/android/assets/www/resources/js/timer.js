@@ -71,7 +71,7 @@ function stopTimer() {
 function getDurationTimer() {
     var duration;
     if (hours == 1) {
-        duration = hours + " hours, " + minutes + " minutes and " + seconds + " seconds";
+        duration = hours + " hour, " + minutes + " minutes and " + seconds + " seconds";
     } else if (hours > 1) {
         duration = hours + " hours, " + minutes + " minutes and " + seconds + " seconds";
     } else if (minutes == 1) {

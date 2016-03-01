@@ -60,10 +60,13 @@ function showSelectedSettings() {
         if (localStorage.getItem("breakNotifBool") == "true") {
             document.getElementById("breakOn").checked = true;
             document.getElementById("breakOff").checked = false;
+            document.getElementById("handleSP").disabled = false;
+
         }
         if (localStorage.getItem("breakNotifBool") == "false") {
             document.getElementById("breakOn").checked = false;
             document.getElementById("breakOff").checked = true;
+            document.getElementById("handleSP").disabled = true;
 
         }
     }

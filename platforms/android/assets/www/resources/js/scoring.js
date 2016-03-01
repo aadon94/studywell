@@ -46,3 +46,7 @@ function sensorScore(sensorNSCount, sensorIntervalCount) {
 function getSessionStudyScore() {
     console.log("Score for this session is: " + sessionStudyScore);
 }
+
+function scoreOnStudyPage() {
+    document.getElementById("studyPageScore").innerHTML = "Score: " + createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount) + " / 100";
+}

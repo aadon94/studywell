@@ -1,5 +1,3 @@
-
-
 //set a new user ID
 function setUserID() {
     var userID = document.getElementById('userIDinput').value;
@@ -19,14 +17,20 @@ function getUserID() {
 //---------------------Study breaks-------------------------------------------
 function handleBreakReminder(breakRemind) {
     localStorage.setItem("breakNotifBool", breakRemind.value);
+
+    if (breakRemind.value == "true") {
+        document.getElementById("handleSP").disabled = false;
+    }
+    if (breakRemind.value == "false") {
+        document.getElementById("handleSP").disabled = true;
+    }
 }
 
 //Check if the user wants to be reminded to take a break
 function getBreakNotifBool() {
     if (localStorage.getItem("breakNotifBool") != null) {
         return localStorage.getItem("breakNotifBool");
-    }
-    else
+    } else
         return true;
 }
 
@@ -38,8 +42,7 @@ function handleStudyPeriod(duration) {
 function getOptimalStudyPeriod() {
     if (localStorage.getItem("optimalStudyDuration") != null) {
         return localStorage.getItem("optimalStudyDuration");
-    }
-    else
+    } else
         return 3000000; //return 50 mins as default value
 }
 //---------------------End of study breaks-------------------------------------------
@@ -53,7 +56,6 @@ function handleDistractedReminder(distractedRemind) {
 function getDistractedBool() {
     if (localStorage.getItem("distractedRemindBool") != null) {
         return localStorage.getItem("distractedRemindBool");
-    }
-    else
+    } else
         return true;
 }

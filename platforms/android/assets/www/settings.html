@@ -71,7 +71,7 @@
       </form>
       <br>
       <div>
-        <select onchange="handleStudyPeriod(this)">
+        <select id="handleSP" onchange="handleStudyPeriod(this)">
           <option value="20" id="20" >20 Minutes</option>
           <option value="30" id="30" >30 Minutes</option>
           <option value="40" id="40" >40 Minutes</option>
@@ -83,9 +83,9 @@
       If you've enabled the break reminder, here you can select how often you want to study between breaks. Rememeber though, I'll only suggest a break if I think you're doing well!
       <br>
       <hr>
-      <h3>Back to Studying Reminder:</h3>
+      <h3>Distraction Reminder:</h3>
       <!--This allows me to let you know if it seems you've become distracted.-->
-      Using this, I can notify you if it seems like you've been distracted for too long.
+      Using this, I can notify you if it seems like you've been significantly distracted for too long.
       <br>
       <form name="distracted">
         <input type="radio" id="distractOn" name="distractedRemind" onclick="handleDistractedReminder(this);" value="true" checked="true"> On<br>
