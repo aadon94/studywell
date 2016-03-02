@@ -22,7 +22,7 @@ function onSuccessAcc(acceleration) {
         localStorage.setItem("accelPulseCount", 9);
 }
     //if this is the first interval run then skip (we want to count the number of pulses per interval first)
-    if (firstRun != true) {
+    if (firstRunAccel != true) {
 
         //check if phone is in motion
         if (acceleration.x > 1 || acceleration.x < -1) {
@@ -97,7 +97,7 @@ function accelInterval() {
 
 //finish the interval
 function stopAccelInterval() {
-    firstRun = false;
+    firstRunAccel = false;
     clearInterval(accelSensor);
     clearTimeout(accelSensor);
     clearTimeout(stopAccelInterval);
