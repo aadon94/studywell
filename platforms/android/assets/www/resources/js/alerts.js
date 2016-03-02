@@ -105,7 +105,7 @@ function onConfirmStopMon(buttonIndex) {
 function pausedPrompt() {
     pauseMonitoring();
     navigator.notification.alert(
-        'Monitoring has been paused, click OK when you wish to resume!', // message
+        'Monitoring has been paused, click OK when you wish to resume.', // message
         resumeMonitoring, // callback
         'Monitoring Paused', // title
         'OK' // buttonName
