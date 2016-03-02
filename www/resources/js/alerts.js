@@ -105,7 +105,7 @@ function onConfirmStopMon(buttonIndex) {
 function pausedPrompt() {
     pauseMonitoring();
     navigator.notification.alert(
-        'Monitoring has been paused, click OK when you wish to resume!', // message
+        'Monitoring has been paused, click OK when you wish to resume.', // message
         resumeMonitoring, // callback
         'Monitoring Paused', // title
         'OK' // buttonName
@@ -215,6 +215,9 @@ function checkBreakReminder() {
                         takeABreakNotif();
                     }
                     takeABreakAlert();
+                    console.log("break suggested at: " + currentT + "time since break: " +timeSinceBreak);
+                    localStorage.setItem("breakSuggestedTime", currentT);
+                    localStorage.setItem("timeSinceBreak", timeSinceBreak);
                     timeResumed = new Date();
                 }
             }
