@@ -203,7 +203,7 @@ function checkBreakReminder() {
 
 
     //check if user should consider having a break from studying
-    if (timeSinceBreak > 30000) { //if time since break is greater than 50 mins (3000000), 60000 1 min
+    if (timeSinceBreak > getOptimalStudyPeriod()) { //if time since break is greater than 50 mins (3000000), 60000 1 min
         var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
         if (localStorage.getItem("oldScore") != null) {
             if ((localStorage.getItem("oldScore") - 5) <= score) {

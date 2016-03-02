@@ -303,6 +303,8 @@ function disableWakeLock() {
 }
 
 
+
+
 // function askUserNotes() {
 //     userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
 //     localStorage.setItem("userNotes", userNotes);

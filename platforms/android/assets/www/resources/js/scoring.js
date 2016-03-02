@@ -19,9 +19,9 @@ function createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, ac
     }
 
     if (accelStudyScore > 75) {
-        appMessage += " There was also a lot of phone movement during this session.";
+        appMessage += " There was a lot of phone movement during this session.";
     } else if (accelStudyScore > 50) {
-        appMessage += " There also seemed to be quite a bit of phone movement - were you fiddling with your phone a lot?";
+        appMessage += " There seemed to be quite a bit of phone movement - were you fiddling with your phone a lot?";
     } else if (accelStudyScore > 25) {
         appMessage += " There seemed to be a moderate amount of phone movement, maybe you were fiddling with your phone every now and then?";
     } else if (accelStudyScore < 25) {
