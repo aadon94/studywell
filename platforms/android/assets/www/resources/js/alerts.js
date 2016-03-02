@@ -171,7 +171,7 @@ function returnToStudyNotif() {
 //Alert the user that they've been studying well for so much time and they might consider having a break----------
 function takeABreakAlert() {
 
-    navigator.notification.beep(2);
+    navigator.notification.beep(1);
     if (breakAlertUp != true) {
         breakAlertUp = true;
         navigator.notification.confirm(

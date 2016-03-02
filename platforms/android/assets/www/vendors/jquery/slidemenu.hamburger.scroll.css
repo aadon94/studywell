@@ -3,8 +3,6 @@ body {
   margin: 0;
   padding: 0;
   background: #eee;
-  overflow-x: auto;
-  overflow-y: auto;
 }
 
 a { text-decoration: none; }
@@ -51,6 +49,8 @@ header {
   -webkit-box-shadow: -10px 0px 9px 0px rgba(0, 0, 0, 0.4);
   box-shadow: -10px 0px 9px 0px rgba(0, 0, 0, 0.4);
   overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 nav {

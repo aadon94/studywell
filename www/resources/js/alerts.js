@@ -122,7 +122,10 @@ function checkDistractedReminder() {
         if (localStorage.getItem("score") > score) {
             if ((localStorage.getItem("score") - score) > 15) {
                 returnToStudyAlert();
-                returnToStudyNotif();
+                if (cordova.plugins.backgroundMode.isActive()) {
+                    returnToStudyNotif();
+                }
+                
             }
         }
     }
@@ -206,7 +209,9 @@ function checkBreakReminder() {
             if ((localStorage.getItem("oldScore") - 5) <= score) {
                 if (score > 60) {
                     //prompt break
-                    takeABreakNotif();
+                    if (cordova.plugins.backgroundMode.isActive()) {
+                        takeABreakNotif();
+                    }
                     takeABreakAlert();
                     timeResumed = new Date();
                 }
