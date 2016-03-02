@@ -122,7 +122,10 @@ function checkDistractedReminder() {
         if (localStorage.getItem("score") > score) {
             if ((localStorage.getItem("score") - score) > 15) {
                 returnToStudyAlert();
-                returnToStudyNotif();
+                if (cordova.plugins.backgroundMode.isActive()) {
+                    returnToStudyNotif();
+                }
+
             }
         }
     }
@@ -175,7 +178,7 @@ function takeABreakAlert() {
     if (breakAlertUp != true) {
         breakAlertUp = true;
         navigator.notification.confirm(
-            'Seems like you\'ve been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!', // message
+            'Seems like you\'ve been studying well for ' +((getOptimalStudyPeriod()/1000)/60) +' minutes now. We recommend a 10 minute break for optimum brain functionality!', // message
             onConfirmBreak, // callback
             'Sorry to interrupt, but...', // title
             ['Continue Studying', 'Take a Break'] // button labels
@@ -187,6 +190,8 @@ function onConfirmBreak(buttonIndex) {
     breakAlertUp = false;
     if (buttonIndex == 1) {
         //continue monitoring (do nothing)
+        timeResumed = new Date();
+
     }
     if (buttonIndex == 2) {
         //pause monitoring
@@ -206,7 +211,9 @@ function checkBreakReminder() {
             if ((localStorage.getItem("oldScore") - 5) <= score) {
                 if (score > 60) {
                     //prompt break
-                    takeABreakNotif();
+                    if (cordova.plugins.backgroundMode.isActive()) {
+                        takeABreakNotif();
+                    }
                     takeABreakAlert();
                     timeResumed = new Date();
                 }

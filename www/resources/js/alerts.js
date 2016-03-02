@@ -125,7 +125,7 @@ function checkDistractedReminder() {
                 if (cordova.plugins.backgroundMode.isActive()) {
                     returnToStudyNotif();
                 }
-                
+
             }
         }
     }
@@ -138,7 +138,7 @@ function returnToStudyAlert() {
     navigator.notification.beep(1);
 
     navigator.notification.confirm(
-        'Seems like you may have become a little distracted. Have you finished your study session?', // message
+        'We think you may have become a little distracted. Have you finished your study session?', // message
         onConfirmReturn, // callback
         'Sorry to interrupt, but...', // title
         ['Take a Break', 'Yes', 'No'] // button labels
@@ -164,7 +164,7 @@ function returnToStudyNotif() {
     cordova.plugins.notification.local.schedule({
         id: 20,
         title: "Sorry to interrupt, but...",
-        text: "Seems like you may have become a little distracted. Have you finished your study session?"
+        text: "We think you may have become a little distracted. Have you finished your study session?"
     });
 }
 //End of Alert the user that they've been distracted for a while-------------------------------------------------
@@ -178,7 +178,7 @@ function takeABreakAlert() {
     if (breakAlertUp != true) {
         breakAlertUp = true;
         navigator.notification.confirm(
-            'Seems like you\'ve been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!', // message
+            'Seems like you\'ve been studying well for ' +((getOptimalStudyPeriod()/1000)/60) +' minutes now. We recommend a 5 to 10 minute break for optimum brain functionality!', // message
             onConfirmBreak, // callback
             'Sorry to interrupt, but...', // title
             ['Continue Studying', 'Take a Break'] // button labels
@@ -190,6 +190,8 @@ function onConfirmBreak(buttonIndex) {
     breakAlertUp = false;
     if (buttonIndex == 1) {
         //continue monitoring (do nothing)
+        timeResumed = new Date();
+
     }
     if (buttonIndex == 2) {
         //pause monitoring
@@ -203,7 +205,7 @@ function checkBreakReminder() {
 
 
     //check if user should consider having a break from studying
-    if (timeSinceBreak > 30000) { //if time since break is greater than 50 mins (3000000), 60000 1 min
+    if (timeSinceBreak > getOptimalStudyPeriod()) { //if time since break is greater than 50 mins (3000000), 60000 1 min
         var score = createStudyScore(micNotStudying, micIntervalCount, accelNotStudying, accelIntervalCount);
         if (localStorage.getItem("oldScore") != null) {
             if ((localStorage.getItem("oldScore") - 5) <= score) {
@@ -224,7 +226,7 @@ function takeABreakNotif() {
     cordova.plugins.notification.local.schedule({
         id: 10,
         title: "Sorry to interrupt, but...",
-        text: "Seems like you've been studying well for quite some time now. We recommend a 10 minute break for optimum brain functionality!"
+        text: "Seems like you've been studying well for " +((getOptimalStudyPeriod()/1000)/60) + " minutes now. We recommend a 5 to 10 minute break for optimum brain functionality!"
     });
 }
 

@@ -229,7 +229,9 @@ function getUserNotes() {
 
 function initialiseMonitoring() {
     document.getElementById("studyPageScore").innerHTML = ""; //clear the previous score from the page.
-    firstRun = true; //var to check if the phone has to indentify the speed at which accel can be checked
+    firstRunAccel = true; //var to check if the phone has to indentify the speed at which accel can be checked
+    firstRunMic = true; //var to check if the phone has to indentify the speed at which accel can be checked
+    
     timeResumed = new Date(); //for checking if user should have break (used to get duration since last break)
 
     localStorage.setItem("accelPulseCount", 0);
@@ -301,6 +303,8 @@ function disableWakeLock() {
         console.log('Failed to release wakelock');
     });
 }
+
+
 
 
 // function askUserNotes() {
