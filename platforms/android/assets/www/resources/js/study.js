@@ -82,13 +82,13 @@ function startMonitoringSensors() {
         updateScore = setInterval(scoreOnStudyPage, 60000);
 
         //Check if the user wants to be reminded if they are too distracted.
-        if (getDistractedBool()) {
+        if (getDistractedBool() == "true") {
             setTimeout(checkDistractedReminder, 600000); //first check begins at 10 mins in (score would be 100 if we did it immediately and cause the next check to immeditately flag)
             studyCheck = setInterval(checkDistractedReminder, 1200000); //timer to check if the users score has dropped significantly in the last 20 mins
         }
 
         //Check if the user wants to be reminded of breaks
-        if (getBreakNotifBool()) {
+        if (getBreakNotifBool() == "true") {
             // setTimeout(checkBreakReminder, 600000); //first check begins at 10 mins in (score would be 100 if we did it immediately and cause the next check to immeditately flag)
             // breakCheck = setInterval(checkBreakReminder, 1200000); //timer to check if the users score has dropped significantly in the last 20 mins
             setTimeout(checkScore, 300000); //first check begins at 10 mins in (score would be 100 if we did it immediately and cause the next check to immeditately flag)
@@ -130,10 +130,10 @@ function stopMonitoringSensors() {
     //timeStop = new Date(); 
     //sessionDuration = (timeStop - timeBegin) - totalDurationPaused;
 
-    if (getDistractedBool()) {
+    if (getDistractedBool() == "true") {
         clearInterval(studyCheck);
     }
-    if (getBreakNotifBool()) {
+    if (getBreakNotifBool() == "true") {
         clearInterval(breakCheck);
     }
     clearInterval(accelMonSensor);
@@ -178,7 +178,7 @@ function pauseMonitoring() {
     timePaused = new Date();
     document.getElementById('myonoffswitch').checked = false;
 
-    if (getBreakNotifBool()) {
+    if (getBreakNotifBool() == "true") {
         clearInterval(breakCheck);
     }
 
@@ -202,7 +202,7 @@ function resumeMonitoring() {
     durationPaused = timeResumed - timePaused; //keep track of duration of pausing
     totalDurationPaused += durationPaused;
 
-    if (getBreakNotifBool()) {
+    if (getBreakNotifBool() == "true") {
         breakCheck = setInterval(checkBreakReminder, 60000); //check if the user should consider having a break every minute
     }
 
@@ -306,11 +306,13 @@ function disableWakeLock() {
 
 
 
+//for some reason the nicer looking prompt broke (text input colour became white on white)
+function askUserNotes() {
+    userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
+    localStorage.setItem("userNotes", userNotes);
 
-// function askUserNotes() {
-//     userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
-//     localStorage.setItem("userNotes", userNotes);
-// }
+    pushData();
+}
 
 // function getUserNotes() {
 //     if (localStorage.getItem("userNotes") != null) {
