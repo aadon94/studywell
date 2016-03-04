@@ -82,7 +82,7 @@ function startMonitoringSensors() {
         updateScore = setInterval(scoreOnStudyPage, 60000);
 
         //Check if the user wants to be reminded if they are too distracted.
-        if (getDistractedBool) {
+        if (getDistractedBool()) {
             setTimeout(checkDistractedReminder, 600000); //first check begins at 10 mins in (score would be 100 if we did it immediately and cause the next check to immeditately flag)
             studyCheck = setInterval(checkDistractedReminder, 1200000); //timer to check if the users score has dropped significantly in the last 20 mins
         }

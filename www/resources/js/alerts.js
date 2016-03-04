@@ -51,8 +51,8 @@ function askUserNotes() {
         'This is an opportunity to enter any notes you wish to remember about this session', // message
         onPrompt, // callback to invoke
         'User Notes', // title
-        ['Ok'], // buttonLabels
-        ' ' // defaultText
+        ['Ok'] // buttonLabels
+
     );
 }
 
