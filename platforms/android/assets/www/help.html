@@ -1,0 +1,183 @@
+<!doctype html>
+<html class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help</title>
+
+  <link href="resources/css/boilerplate.css" rel="stylesheet" type="text/css">
+  <!--<link href="resources/css/index.css" rel="stylesheet" type="text/css">-->
+  <link href="vendors/jquery/slidemenu.hamburger.scroll.css" rel="stylesheet" type="text/css">
+  <script src="cordova.js"></script>
+  <link href="css/index.css" rel="stylesheet" type="text/css">
+
+
+
+</head>
+<body>
+  <div class="gridContainer clearfix">
+   <header>
+    <div id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="title hamburger-action">Help</div>
+  </header>
+
+  <nav class="clear">
+    <ul>
+      <li><a href="index.html" class="same-page">Study Time</a></li>
+      <li><a href="schedule.html" class="leave-studying">Schedule</a></li> 
+      <li><a href="reports.html" class="leave-studying">Reports</a></li>
+      <li><a href="settings.html" class="leave-studying">Settings</a></li>
+      <li><a href="help.html" class="leave-studying">Help</a></li>
+      <li><a href="#" onclick="window.open('https://docs.google.com/forms/d/1uZ3MqweHP81HR19M8IqSFBJcJMG_Ht78fJMcGzmvHiY/viewform', '_system');" class="leave-studying">Post-Session Questionnaire</a></li>
+    </ul>
+  </nav>
+
+
+  <div id="content">
+
+    <div class="helpText">
+      <h3>Menu</h3>
+      The menu for the app can be accessed by selecting the 3 white horizontal lines in the top left corner of the screen. This gives access to all pages within the app. “Study Time” is the default page and the one where you will be starting, pausing and finishing your study sessions.
+      <hr>
+      <h3>Study Time</h3>
+      <u>start:</u>
+      <ol>
+        <li>press the switch while it is in it’s ‘off state’ (grey coloured)</li>
+      </ol>
+      <br>
+      <u>pause:</u><br>
+      <ol>
+        <li>press the switch while it is in it’s ‘on state’ (blue coloured)</li>
+        <li>select “take a short break” when the “confirmation” window pops up</li>
+      </ol>
+      <br>
+      <u>resume:</u><br>
+      <ol>
+        <li>select “ok” or tap anywhere off of the “monitoring paused” message</li>
+      </ol> 
+      <br>
+      <u>stop:</u><br>
+      <ol>
+        <li>
+          press the switch while it is in it’s ‘on state’ (blue coloured)
+        </li>
+        <li>select “yes” when the “confirmation” window pops up</li>
+        <li>enter any notes you wish to save regarding the session and click “ok”. It is fine to leave the input field blank and just click “ok” if you have no notes to save.</li>
+        <li>Upon stopping, your session will be saved.</li>
+      </ol>
+      <br>
+      Whilst a session is in progress you cannot leave the “Study Time” page. To leave it you must first end the session.
+      <br>
+      <hr>
+
+      <h3>Schedule</h3>
+      This page is a placeholder. The feature is still a work-in-progress. For now there is only a button allowing you to open Google Calendar - something which can allow you to plan study sessions.
+      <br>
+      <hr>
+
+      <h3>Reports</h3>
+      This section is where you can view the reports on all your previous study sessions. Reports will be ordered by time and date, from earliest to latest. As of just now, to review your reports you must be connected to the internet.
+      <br>
+      <hr>
+
+
+      <h3>Settings</h3>
+      In this section of the app you can change the app’s default settings to your own custom ones. 
+      <br>
+      <br>
+      <u>current user ID:</u><br>
+      <ol>
+        <li>directly under “Current User ID” you will find what your ID is currently set to</li>
+      </ol> 
+      <br>
+      <u>new user ID:</u><br>
+      <ol>
+        <li>tap the input box below “New User ID” - your device's keyboard should appear.</li>
+        <li>enter your user ID</li>
+        <li>tap the “Submit” button below the input box.</li>
+      </ol>
+      <br>
+
+      <u>enable break reminder:</u>      
+      <ol>
+        <li>in the “break reminder” section, select the “on” radio button</li>
+        <li>there should be a dark dot in the circle next to the “on” text</li>
+        <li>there should be no dark dot in the circle next to the “off” text</li>
+      </ol>
+      
+      <br>
+      <u>disable break reminder:</u><br>
+      <ol>
+        <li>in the “break reminder” section, select the “off” radio button</li>
+        <li>there should be a dark dot in the circle next to the “off” text</li>
+        <li>there should be no dark dot in the circle next to the “on” text</li>
+      </ol>
+      
+      <br>
+      <u>set study duration between break reminders:</u><br>
+      <ol>
+        <li>enable break reminder (see above)</li>
+        <li>tap the rectangle stating “X Minutes” with a small arrow pointing down - X being either “20, 30, 40, 50 or 60”</li>
+        <li>a pop up should appear</li>
+        <li>select the duration you want to study for between breaks</li>
+      </ol>
+
+      <br>
+      <u>enable distraction reminder:</u><br>
+      <ol>
+        <li>in the “distraction reminder” section, select the “on” radio button</li>
+        <li>there should be a dark dot in the circle next to the “on” text</li>
+        <li>there should be no dark dot in the circle next to the “off” text</li>
+      </ol>
+      <br>
+      
+      <u>disable distraction reminder:</u><br>
+      <ol>
+        <li>in the “distraction reminder” section, select the “off” radio button</li>
+        <li>there should be a dark dot in the circle next to the “off” text</li>
+        <li>there should be no dark dot in the circle next to the “on” text</li>
+      </ol>
+      <br>
+      
+      <u>custom noise threshold level:</u>      
+      <ol>
+       <li>in the “surrounding noise level” section</li>
+       <li>tap the “record noise level” button</li>
+       <li>tap “ok” on the pop up that appears</li>
+       <li>wait 10 seconds</li>
+       <li>tap ok on the pop up that appears</li>
+     </ol>
+     
+     <br>
+     <u>default noise threshold level:</u><br>
+     <ol>
+      <li>in the “surrounding noise level” section</li>
+      <li>tap the “default value” button</li>
+      <li>tap “ok” on the pop up that appears</li>
+    </ol>
+    <br>
+    <hr>
+
+    <h3>Help</h3>
+    In this section you can read the user guide and find instructions on how to complete the user evaluation.
+    <br>
+    <hr>
+
+
+    <h3>Post-Session Questionnaire</h3>
+    This button will open up a questionnaire in your browser. This questionnaire is for filling in after a study session. It is not necessary to fill one in if your study session only lasted a few minutes. Information such as “session ID” that the questionnaire asks for can be found in the “Reports” section of the app. Ensure you are looking at the correct report when you take note of the session ID.
+  </div>
+
+</div>
+</div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="vendors/jquery/jquery.hamburger.js"></script>
+<script src="resources/js/schedule.js"></script>
+
+
