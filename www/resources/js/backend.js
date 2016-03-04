@@ -1,3 +1,4 @@
+
 var swFireBase = new Firebase("https://vivid-heat-9475.firebaseIO.com/");
 
 var	users = swFireBase.child('users');
