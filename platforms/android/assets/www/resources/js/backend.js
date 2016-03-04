@@ -20,7 +20,10 @@ function pushData() {
 	  accelIntervalCount: accelIntervalCount,
 	  accelNotStudingCount: accelNotStudying,
 	  appMessage: appMessage,
-	  userNotes: getUserNotes()
+	  userNotes: getUserNotes(),
+	  distractedReminder: getDistractedBool() +" Count: " +distractedReminderCount,
+	  breakReminder: getBreakNotifBool() +" Count: " +breakReminderCount
+
   }
 );
 }

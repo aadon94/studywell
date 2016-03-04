@@ -239,7 +239,9 @@ function initialiseMonitoring() {
     micOff();
 
     localStorage.removeItem("oldScore");
-
+    localStorage.removeItem("score");
+    breakReminderCount = 0;
+    distractedReminderCount = 0;
 
 
     totalDurationPaused = 0;

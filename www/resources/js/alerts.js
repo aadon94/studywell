@@ -1,4 +1,6 @@
 var breakAlertUp = false;
+var breakReminderCount = 0;
+var distractedReminderCount = 0;
 
 //Alert the user they have successfully set a custom ambient noise level
 function customVolumeLevelSet() {
@@ -123,6 +125,7 @@ function checkDistractedReminder() {
         if (localStorage.getItem("score") > score) {
             if ((localStorage.getItem("score") - score) > 15) {
                 returnToStudyAlert();
+                distractedReminderCount++;
                 if (cordova.plugins.backgroundMode.isActive()) {
                     returnToStudyNotif();
                 }
@@ -220,6 +223,7 @@ function checkBreakReminder() {
                     localStorage.setItem("breakSuggestedTime", currentT);
                     localStorage.setItem("timeSinceBreak", timeSinceBreak);
                     timeResumed = new Date();
+                    breakReminderCount++;
                 }
             }
         }
