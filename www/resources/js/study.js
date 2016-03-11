@@ -245,8 +245,8 @@ function initialiseMonitoring() {
 
 
     totalDurationPaused = 0;
-    accelSampleRate = 30000;
-    micSampleRate = 30000;
+    accelSampleRate = 30000; //sampling rate for accelerometer
+    micSampleRate = 30000;  //sampling rate for microphone
     micSteadyScoreCount = 0;
     micFluctuatingScoreCount = 0;
     accelSteadyScoreCount = 0;

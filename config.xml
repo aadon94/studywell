@@ -8,6 +8,7 @@
         Adam Don
     </author>
     <content src="index.html" />
+    <!-- <content src="cdvtests/index.html" /> Runs Tests -->
     <icon src="res/icon.png" />
 
     <preference name="DisallowOverscroll" value="true"/>

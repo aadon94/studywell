@@ -92,6 +92,30 @@ module.exports = [
             "cordova.plugins.notification.local.core",
             "plugin.notification.local.core"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-device-tests/tests.js",
+        "id": "cordova-plugin-device-tests.tests"
+    },
+    {
+        "file": "plugins/cordova-plugin-device-motion-tests/tests.js",
+        "id": "cordova-plugin-device-motion-tests.tests"
+    },
+    {
+        "file": "plugins/cordova-plugin-test-framework/www/tests.js",
+        "id": "cordova-plugin-test-framework.cdvtests"
+    },
+    {
+        "file": "plugins/cordova-plugin-test-framework/www/jasmine_helpers.js",
+        "id": "cordova-plugin-test-framework.jasmine_helpers"
+    },
+    {
+        "file": "plugins/cordova-plugin-test-framework/www/medic.js",
+        "id": "cordova-plugin-test-framework.medic"
+    },
+    {
+        "file": "plugins/cordova-plugin-test-framework/www/main.js",
+        "id": "cordova-plugin-test-framework.main"
     }
 ];
 module.exports.metadata = 
@@ -106,7 +130,10 @@ module.exports.metadata =
     "cordova-plugin-device-motion": "1.2.0",
     "cordova-plugin-dialogs": "1.2.0",
     "cordova-plugin-whitelist": "1.2.1",
-    "de.appplant.cordova.plugin.local-notification": "0.8.4"
+    "de.appplant.cordova.plugin.local-notification": "0.8.4",
+    "cordova-plugin-device-tests": "1.1.2-dev",
+    "cordova-plugin-device-motion-tests": "1.2.1-dev",
+    "cordova-plugin-test-framework": "1.1.2-dev"
 };
 // BOTTOM OF METADATA
 });

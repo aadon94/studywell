@@ -35,7 +35,7 @@
 
 </head>
 
-<body>
+<body id="home">
   <div class="gridContainer clearfix">
     <header>
       <div id="hamburger">
@@ -48,11 +48,11 @@
     
     <nav class="clear">
       <ul>
-        <li><a href="index.html" class="same-page">Study Time</a></li>
-        <li><a href="schedule.html" class="leave-studying">Schedule</a></li> 
-        <li><a href="reports.html" class="leave-studying">Reports</a></li>
-        <li><a href="settings.html" class="leave-studying">Settings</a></li>
-        <li><a href="help.html" class="leave-studying">Help</a></li>
+        <li><a href="index.html" id="ST" class="same-page">Study Time</a></li>
+        <li><a href="schedule.html" id="sched" class="leave-studying">Schedule</a></li> 
+        <li><a href="reports.html" id="reps" class="leave-studying">Reports</a></li>
+        <li><a href="settings.html" id="set" class="leave-studying">Settings</a></li>
+        <li><a href="help.html" id="help" class="leave-studying">Help</a></li>
         <li><a href="#" onclick="window.open('https://docs.google.com/forms/d/1uZ3MqweHP81HR19M8IqSFBJcJMG_Ht78fJMcGzmvHiY/viewform', '_system');" class="leave-studying">Post-Session Questionnaire</a></li>
       </ul>
     </nav>
@@ -71,7 +71,9 @@
     <br>
     <br>
 
-    <h1><time>00:00:00</time></h1>
+    <div id="timer">
+      <h1><time>00:00:00</time></h1>
+    </div>
     <br>
     <br>
     <h2><div id="studyPageScore"></div></h2>
@@ -91,6 +93,28 @@
 <script src="resources/js/timer.js"></script>
 
 </html>
+
+    // Test the navigation bar by clicking on the 'REVIEW' link and checking the URL changes to '/review'
+    it('Has a working nav', function(done) {
+        var currentURL = this.driver.getCurrentUrl();
+        var element = this.driver.findElement(selenium.By.id('hamburger'));
+
+        element.click();
+
+        setTimeout(restTest, 2000);
+        var currentURL = this.driver.getCurrentUrl();
+
+
+        var menuElement = this.driver.findElement(selenium.By.id('ST'));
+
+        menuElement.click();
+
+        this.driver.getCurrentUrl().then(function(value) {
+            expect(value).toContain('/index');
+            done();
+        });
+
+    });
 
 
 
