@@ -15,15 +15,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.shukriadams.micVolume": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/shukriadams/micVolume.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-device-motion": {
         "source": {
             "type": "registry",
@@ -61,6 +52,59 @@
         "source": {
             "type": "git",
             "url": "https://github.com/boltex/cordova-plugin-powermanagement.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "de.appplant.cordova.plugin.local-notification": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/katzer/cordova-plugin-local-notifications",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-app-event": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-app-event"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-device-tests": {
+        "source": {
+            "type": "git",
+            "url": "http://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git",
+            "subdir": "tests"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-device-motion-tests": {
+        "source": {
+            "type": "git",
+            "url": "http://git-wip-us.apache.org/repos/asf/cordova-plugin-device-motion.git",
+            "subdir": "tests"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-test-framework": {
+        "source": {
+            "type": "git",
+            "url": "http://git-wip-us.apache.org/repos/asf/cordova-plugin-test-framework.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.shukriadams.micVolume": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/shukriadams/micVolume",
             "subdir": "."
         },
         "is_top_level": true,

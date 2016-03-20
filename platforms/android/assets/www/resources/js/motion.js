@@ -1,15 +1,20 @@
 //
 function onSuccessAcc(acceleration) {
-    console.log('Acceleration X: ' + acceleration.x + '\n' +
-        'Acceleration Y: ' + acceleration.y + '\n' +
-        'Acceleration Z: ' + acceleration.z + '\n' +
-        'Timestamp: ' + acceleration.timestamp + '\n');
+    // console.log('Acceleration X: ' + acceleration.x + '\n' +
+    //     'Acceleration Y: ' + acceleration.y + '\n' +
+    //     'Acceleration Z: ' + acceleration.z + '\n' +
+    //     'Timestamp: ' + acceleration.timestamp + '\n');
     // var currentAccelValues = new accelValues(acceleration.x, acceleration.y, acceleration.z, acceleration.timestamp);
 
     //boolean for if the device is moving or not
     var moving = false;
 
     accelPulseCount++; //this is a count of how many pulses the accelerometer sensor has read (how many pulses within this interval) 
+
+
+
+
+
 
     //check how fast the phone can pulse accelerometer (some phones limited)
     if (localStorage.getItem("accelPulseCount") == null) {
@@ -20,30 +25,33 @@ function onSuccessAcc(acceleration) {
     //safety precausion to make sure accelPulseCount does not go above 9
     if (localStorage.getItem("accelPulseCount") > 9) {
         localStorage.setItem("accelPulseCount", 9);
-}
+    }
     //if this is the first interval run then skip (we want to count the number of pulses per interval first)
-    if (firstRun != true) {
+    if (firstRunAccel != true) {
 
-        //check if phone is in motion
-        if (acceleration.x > 1 || acceleration.x < -1) {
-            moving = true;
+        if (localStorage.getItem("accelX") != null) {
+            //check if phone was in motion
+            if (Math.abs(localStorage.getItem("accelX")) - Math.abs(acceleration.x) > 0.5 || Math.abs(localStorage.getItem("accelX")) - Math.abs(acceleration.x) < -0.5) {
+                hasMoved = true;
+            }
+            if (Math.abs(localStorage.getItem("accelY")) - Math.abs(acceleration.y) > 0.5 || Math.abs(localStorage.getItem("accelY")) - Math.abs(acceleration.y) < -0.5) {
+                hasMoved = true;
+            }
+            if (Math.abs(localStorage.getItem("accelZ")) - Math.abs(acceleration.z) > 0.5 || Math.abs(localStorage.getItem("accelZ")) - Math.abs(acceleration.z) < -0.5) {
+                hasMoved = true;
+            } else
+                hasMoved = false;
+            console.log("X difference: " + (Math.abs(localStorage.getItem("accelX")) - Math.abs(acceleration.x)));
+            console.log("Y difference: " + (Math.abs(localStorage.getItem("accelY")) - Math.abs(acceleration.y)));
+            console.log("Z difference: " + (Math.abs(localStorage.getItem("accelZ")) - Math.abs(acceleration.z)));
         }
-        if (acceleration.y > 1 || acceleration.y < -1) {
-            moving = true;
-        }
-        if (acceleration.z > 10.2 || acceleration.z < 8.2) {
-            moving = true;
-        }
-        if (moving) {
-            motionCount++;
-        }
-        //if total count of moving is greater than the total number of pulses per interval divided by 3 then device is said to be moving in this interval
-        if (motionCount > (localStorage.getItem("accelPulseCount") / 3)) {
+
+
+
+        if (hasMoved) {
+            console.log("accel not studying count went up");
             accelNotStudying++;
             accelIntervalNSBool = "true";
-            //console.log("Hit the interval move loop");
-
-
             stopAccelInterval();
 
         } else if (accelPulseCount > (localStorage.getItem("accelPulseCount") - 1)) { //once the interval is nearly finished, device is not moving this interval
@@ -51,6 +59,8 @@ function onSuccessAcc(acceleration) {
             //console.log("accelIntervalNSBool: " +accelIntervalNSBool    );
             accelPulseCount = 0;
             //console.log("Hit the interval not moving loop");
+            console.log("accel not studying REMAINS the same");
+
 
         }
         //As long as this isn't the first time this method is running, check if the sample rate needs updated.
@@ -66,8 +76,15 @@ function onSuccessAcc(acceleration) {
             // Sorry! No Web Storage support..
             console.log("No web storage support - oh dear.");
         }
-        console.log('Device moving: ' + moving);
+        // console.log('Device moving: ' + moving);
+        console.log('Device moving: ' + hasMoved);
+
     }
+
+    //Store the values to compare next interval
+    localStorage.setItem("accelX", acceleration.x);
+    localStorage.setItem("accelY", acceleration.y);
+    localStorage.setItem("accelZ", acceleration.z);
 }
 
 
@@ -85,7 +102,7 @@ function readAccel() {
 function accelInterval() {
     //localStorage.setItem("oldAccelIntervalNotStudyingBool", "initial");
     accelPulseCount = 0; //this is a count of how many pulses the accelerometer sensor has read (how many pulses within this interval) 
-
+    hasMoved = false;
     //console.log("Accelerometer sampling rate: " + accelSampleRate);
     accelIntervalNSBool = false; //boolean to determine if the user is not studying during the current interval
 
@@ -97,7 +114,7 @@ function accelInterval() {
 
 //finish the interval
 function stopAccelInterval() {
-    firstRun = false;
+    firstRunAccel = false;
     clearInterval(accelSensor);
     clearTimeout(accelSensor);
     clearTimeout(stopAccelInterval);

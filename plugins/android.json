@@ -7,31 +7,45 @@
         "files": {}
     },
     "installed_plugins": {
+        "at.gofg.sportscomputer.powermanagement": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
         "com.lampa.startapp": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
-        "com.shukriadams.micVolume": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        },
-        "cordova-plugin-device-motion": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        },
-        "cordova-plugin-dialogs": {
+        "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
         "cordova-plugin-background-mode": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
-        "at.gofg.sportscomputer.powermanagement": {
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "de.appplant.cordova.plugin.local-notification": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-device-tests": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-device-motion-tests": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "cordova-plugin-test-framework": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "com.shukriadams.micVolume": {
             "PACKAGE_NAME": "com.adamdon.sw"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        }
-    }
+    "dependent_plugins": {}
 }

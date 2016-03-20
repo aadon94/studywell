@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.adamdon.sw" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.adamdon.sw" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>StudyWell</name>
     <description>
         An app to monitor the users behaviour and determine if the user is studying or not.
@@ -8,11 +8,14 @@
         Adam Don
     </author>
     <content src="index.html" />
+    <!-- <content src="cdvtests/index.html" /> Runs Tests -->
     <icon src="res/icon.png" />
 
     <preference name="DisallowOverscroll" value="true"/>
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
+    <preference name="Orientation" value="portrait" />
+
 
      <feature name="<service_name>">
         <param name="android-package" value="<full_name_including_namespace>" />

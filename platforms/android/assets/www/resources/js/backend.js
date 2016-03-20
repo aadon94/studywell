@@ -1,3 +1,4 @@
+
 var swFireBase = new Firebase("https://vivid-heat-9475.firebaseIO.com/");
 
 var	users = swFireBase.child('users');
@@ -19,7 +20,10 @@ function pushData() {
 	  accelIntervalCount: accelIntervalCount,
 	  accelNotStudingCount: accelNotStudying,
 	  appMessage: appMessage,
-	  userNotes: getUserNotes()
+	  userNotes: getUserNotes(),
+	  distractedReminder: getDistractedBool() +" Count: " +distractedReminderCount,
+	  breakReminder: getBreakNotifBool() +" Count: " +breakReminderCount
+
   }
 );
 }

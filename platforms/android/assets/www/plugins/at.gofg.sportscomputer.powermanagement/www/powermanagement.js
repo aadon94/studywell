@@ -1,4 +1,5 @@
-cordova.define("at.gofg.sportscomputer.powermanagement.device", function(require, exports, module) { /*
+cordova.define("at.gofg.sportscomputer.powermanagement.device", function(require, exports, module) {
+/*
  * Copyright 2013 Wolfgang Koller
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

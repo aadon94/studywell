@@ -1,4 +1,5 @@
-cordova.define("com.shukriadams.micVolume.MicVolume", function(require, exports, module) { var micVolume = {
+cordova.define("com.shukriadams.micVolume.MicVolume", function(require, exports, module) {
+var micVolume = {
     start: function(successCallback, errorCallback) {
  		cordova.exec(
             successCallback, // success callback function
