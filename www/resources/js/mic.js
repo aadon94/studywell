@@ -51,7 +51,7 @@ function readMic(reading) {
 
     micPulseCount++;
 
-    //check how fast the phone can pulse mic (some phones limited)
+    //check how fast the phone can pulse mic (some phones may be limited)
     if (localStorage.getItem("micPulseCount") == null) {
         localStorage.setItem("micPulseCount", micPulseCount);
     } else if (micPulseCount > localStorage.getItem("micPulseCount")) {
@@ -64,7 +64,7 @@ function readMic(reading) {
     if (firstRunMic != true) {
 
         micVolume.read(function(reading) {
-            console.log("micPulseCount: " + micPulseCount + "  vol: " + reading.volume);
+            // console.log("micPulseCount: " + micPulseCount + "  vol: " + reading.volume);
             vol = reading.volume;
             totalVol = totalVol + vol;
         }, errorCallback);

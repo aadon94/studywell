@@ -15,13 +15,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.shukriadams.micVolume/www/micVolume.js",
-        "id": "com.shukriadams.micVolume.MicVolume",
-        "clobbers": [
-            "window.micVolume"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-device/www/device.js",
         "id": "cordova-plugin-device.device",
         "clobbers": [
@@ -116,6 +109,13 @@ module.exports = [
     {
         "file": "plugins/cordova-plugin-test-framework/www/main.js",
         "id": "cordova-plugin-test-framework.main"
+    },
+    {
+        "file": "plugins/com.shukriadams.micVolume/www/micVolume.js",
+        "id": "com.shukriadams.micVolume.MicVolume",
+        "clobbers": [
+            "window.micVolume"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -123,7 +123,6 @@ module.exports.metadata =
 {
     "at.gofg.sportscomputer.powermanagement": "1.1.0",
     "com.lampa.startapp": "0.0.5",
-    "com.shukriadams.micVolume": "0.1.0",
     "cordova-plugin-app-event": "1.2.0",
     "cordova-plugin-device": "1.1.1",
     "cordova-plugin-background-mode": "0.6.5",
@@ -133,7 +132,8 @@ module.exports.metadata =
     "de.appplant.cordova.plugin.local-notification": "0.8.4",
     "cordova-plugin-device-tests": "1.1.2-dev",
     "cordova-plugin-device-motion-tests": "1.2.1-dev",
-    "cordova-plugin-test-framework": "1.1.2-dev"
+    "cordova-plugin-test-framework": "1.1.2-dev",
+    "com.shukriadams.micVolume": "0.1.0"
 };
 // BOTTOM OF METADATA
 });

@@ -309,12 +309,12 @@ function disableWakeLock() {
 
 
 //for some reason the nicer looking prompt broke (text input colour became white on white)
-// function askUserNotes() {
-//     userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
-//     localStorage.setItem("userNotes", userNotes);
+function askUserNotes() {
+    userNotes = prompt("This is an opportunity to enter any notes you wish to remember about this session. If you have nothing to add then just click OK.");
+    localStorage.setItem("userNotes", userNotes);
 
-//     pushData();
-// }
+    pushData();
+}
 
 // function getUserNotes() {
 //     if (localStorage.getItem("userNotes") != null) {

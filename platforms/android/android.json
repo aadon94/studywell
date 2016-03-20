@@ -17,10 +17,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"MicVolumePlugin\"><param name=\"android-package\" value=\"com.shukriadams.micVolume.MicVolumePlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         },
@@ -47,6 +43,10 @@
                         {
                             "xml": "<feature name=\"LocalNotification\"><param name=\"android-package\" value=\"de.appplant.cordova.plugin.localnotification.LocalNotification\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"MicVolumePlugin\"><param name=\"android-package\" value=\"com.shukriadams.micVolume.MicVolumePlugin\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -61,15 +61,15 @@
                     ],
                     "/manifest": [
                         {
-                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
-                            "count": 1
-                        },
-                        {
                             "xml": "<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\" />",
                             "count": 1
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
                             "count": 1
                         }
                     ],
@@ -118,9 +118,6 @@
         "com.lampa.startapp": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
-        "com.shukriadams.micVolume": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        },
         "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
@@ -150,6 +147,9 @@
         },
         "cordova-plugin-test-framework": {
             "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "com.shukriadams.micVolume": {
+            "PACKAGE_NAME": "com.adamdon.sw"
         }
     },
     "dependent_plugins": {},
@@ -166,13 +166,6 @@
             "id": "com.lampa.startapp.startapp",
             "merges": [
                 "navigator.startApp"
-            ]
-        },
-        {
-            "file": "plugins/com.shukriadams.micVolume/www/micVolume.js",
-            "id": "com.shukriadams.micVolume.MicVolume",
-            "clobbers": [
-                "window.micVolume"
             ]
         },
         {
@@ -270,12 +263,18 @@
         {
             "file": "plugins/cordova-plugin-test-framework/www/main.js",
             "id": "cordova-plugin-test-framework.main"
+        },
+        {
+            "file": "plugins/com.shukriadams.micVolume/www/micVolume.js",
+            "id": "com.shukriadams.micVolume.MicVolume",
+            "clobbers": [
+                "window.micVolume"
+            ]
         }
     ],
     "plugin_metadata": {
         "at.gofg.sportscomputer.powermanagement": "1.1.0",
         "com.lampa.startapp": "0.0.5",
-        "com.shukriadams.micVolume": "0.1.0",
         "cordova-plugin-app-event": "1.2.0",
         "cordova-plugin-device": "1.1.1",
         "cordova-plugin-background-mode": "0.6.5",
@@ -285,6 +284,7 @@
         "de.appplant.cordova.plugin.local-notification": "0.8.4",
         "cordova-plugin-device-tests": "1.1.2-dev",
         "cordova-plugin-device-motion-tests": "1.2.1-dev",
-        "cordova-plugin-test-framework": "1.1.2-dev"
+        "cordova-plugin-test-framework": "1.1.2-dev",
+        "com.shukriadams.micVolume": "0.1.0"
     }
 }

@@ -240,6 +240,9 @@ function initialiseMonitoring() {
 
     localStorage.removeItem("oldScore");
     localStorage.removeItem("score");
+    localStorage.removeItem("accelX");
+    localStorage.removeItem("accelY");
+    localStorage.removeItem("accelZ");
     breakReminderCount = 0;
     distractedReminderCount = 0;
 

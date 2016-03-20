@@ -64,7 +64,7 @@ function readMic(reading) {
     if (firstRunMic != true) {
 
         micVolume.read(function(reading) {
-            console.log("micPulseCount: " + micPulseCount + "  vol: " + reading.volume);
+            // console.log("micPulseCount: " + micPulseCount + "  vol: " + reading.volume);
             vol = reading.volume;
             totalVol = totalVol + vol;
         }, errorCallback);

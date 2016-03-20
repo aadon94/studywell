@@ -49,15 +49,15 @@ function stillRecordingNoiseLevelWarning() {
 
 //for some reason this nicer looking prompt broke (text input colour became white on white)
 //Ask the user for notes on their session. ----------------------------------------------------------------
-function askUserNotes() {
-    navigator.notification.prompt(
-        'This is an opportunity to enter any notes you wish to remember about this session', // message
-        onPrompt, // callback to invoke
-        'User Notes', // title
-        ['Ok'] // buttonLabels
+// function askUserNotes() {
+//     navigator.notification.prompt(
+//         'This is an opportunity to enter any notes you wish to remember about this session', // message
+//         onPrompt, // callback to invoke
+//         'User Notes', // title
+//         ['Ok'] // buttonLabels
 
-    );
-}
+//     );
+// }
 
 function onPrompt(results) {
     userNotes = results.input1;

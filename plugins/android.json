@@ -13,9 +13,6 @@
         "com.lampa.startapp": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
-        "com.shukriadams.micVolume": {
-            "PACKAGE_NAME": "com.adamdon.sw"
-        },
         "cordova-plugin-app-event": {
             "PACKAGE_NAME": "com.adamdon.sw"
         },
@@ -44,6 +41,9 @@
             "PACKAGE_NAME": "com.adamdon.sw"
         },
         "cordova-plugin-test-framework": {
+            "PACKAGE_NAME": "com.adamdon.sw"
+        },
+        "com.shukriadams.micVolume": {
             "PACKAGE_NAME": "com.adamdon.sw"
         }
     },

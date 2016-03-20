@@ -15,15 +15,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "com.shukriadams.micVolume": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/shukriadams/micVolume.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-device-motion": {
         "source": {
             "type": "registry",
@@ -105,6 +96,15 @@
         "source": {
             "type": "git",
             "url": "http://git-wip-us.apache.org/repos/asf/cordova-plugin-test-framework.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.shukriadams.micVolume": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/shukriadams/micVolume",
             "subdir": "."
         },
         "is_top_level": true,
